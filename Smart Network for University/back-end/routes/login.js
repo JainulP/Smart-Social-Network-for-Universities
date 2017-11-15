@@ -1,25 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require("./mysql");
-var CryptoJS = require("crypto-js");
-
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
-});
 
 router.post('/doLogin', function (req, res, next) {
-
-    // var reqUsername = req.body.username;
-	// var reqPassword = req.body.password;
-
-	var bytes  = CryptoJS.AES.decrypt(req.body.EncPassword.toString(), '123');
-    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
 
 	var reqUsername = req.body.EmailId;
     var reqPassword = req.body.Password;
 
-    var getUser = "SELECT * FROM Users WHERE EmailId = '"+reqUsername+"' and Password = '"+reqPassword+"'";
+    var getUser = "SELECT * FROM user WHERE emailid = '"+reqUsername+"' and password = '"+reqPassword+"'";
 	console.log("query is :" +getUser);
 	
 	mysql.fetchData(function(err, result){

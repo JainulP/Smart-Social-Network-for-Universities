@@ -42,8 +42,8 @@ function getConnection(){
 	var pool = mysql.createPool({
 		host : 'localhost',
 		user : 'root',
-		password : 'tejas',
-		database : 'db_dropbox',
+		password : 'root',
+		database : 'db_ssn',
 		port : '3306',
 		connectionLimit : 600
 	});
