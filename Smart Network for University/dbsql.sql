@@ -34,7 +34,7 @@ CREATE TABLE `user_dep_mapping` (
   `userid` INT(11) NOT NULL,
   `departmentid` INT(11) NOT NULL,
   FOREIGN KEY (`userid`) REFERENCES user(`userid`),
-  FOREIGN KEY (`departmentid`) REFERENCES user(`departmentid`)
+  FOREIGN KEY (`departmentid`) REFERENCES department(`departmentid`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
