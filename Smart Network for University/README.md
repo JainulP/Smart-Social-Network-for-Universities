@@ -1,4 +1,4 @@
-Steps to start Dropbox Application:
+Steps to start Application:
 
 front-end(react):
 Execute below commands in your front-end directory
@@ -13,7 +13,6 @@ Execute below commands in your front-end directory
 
 Steps to import database:
 
-1. Create database named db_dropbox with command: create database db_dropbox
 
 mysql -u root -p db_dropbox < dbschema.sql
 
