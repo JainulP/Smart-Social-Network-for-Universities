@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import {withRouter, Route, Link, Switch} from 'react-router-dom';
+import {Route, Link, Switch} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-// import HotelsHome from './Messages/MessagesHome'; import HotelsHome from
-// './Files/FilesHome';
-import MyRequests from './Requests/MyRequests';
-import Home from './Home';
 
-class App extends Component {
+class MyRequests extends Component {
 
     render() {
         return (
@@ -71,7 +67,8 @@ class App extends Component {
                             </ul>
                         </nav>
                         <div className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                            
+                             <h1>MyRequests</h1>
+                             Add your components here
                         </div>
                     </div>
                 </div>
@@ -80,4 +77,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default MyRequests;
