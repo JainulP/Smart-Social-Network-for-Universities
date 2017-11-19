@@ -8,6 +8,18 @@ var multer = require('multer');
 var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
+var superAdmin = require('./routes/Admin/superAdmin');
+var addCommunity =require('./routes/Admin/addCommunity');
+var remCommunity =require('./routes/Admin/remCommunity');
+var remAdmin =require('./routes/Admin/remAdmin');
+var adminLogin = require('./routes/adminLogin');
+var addUser =require('./routes/addUser');
+var remUser =require('./routes/Admin/remUser');
+var listUsers =require('./routes/listUsers');
+
+
+
+
 
 
 var app = express();
@@ -20,6 +32,7 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -30,6 +43,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/login', login);
 app.use('/signup', signup);
+app.use('/superAdmin', superAdmin);
+app.use('/addCommunity',addCommunity);
+app.use('/remCommunity',remCommunity);
+app.use('/remAdmin',remAdmin);
+app.use('/adminLogin',adminLogin);
+app.use('/addUser',addUser);
+app.use('/remUser',remUser);
+app.use('/listUsers',listUsers);
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
