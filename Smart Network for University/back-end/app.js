@@ -8,6 +8,7 @@ var multer = require('multer');
 var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
+
 var superAdmin = require('./routes/Admin/superAdmin');
 var addCommunity =require('./routes/Admin/addCommunity');
 var remCommunity =require('./routes/Admin/remCommunity');
@@ -19,6 +20,9 @@ var listUsers =require('./routes/listUsers');
 
 
 
+
+
+var request = require('./routes/request');
 
 
 
@@ -43,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/login', login);
 app.use('/signup', signup);
+
 app.use('/superAdmin', superAdmin);
 app.use('/addCommunity',addCommunity);
 app.use('/remCommunity',remCommunity);
@@ -52,6 +57,9 @@ app.use('/addUser',addUser);
 app.use('/remUser',remUser);
 app.use('/listUsers',listUsers);
 
+
+
+app.use('/request', request);
 
 
 // catch 404 and forward to error handler

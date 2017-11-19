@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as LoginAPI from '../api/LoginAPI';
 import App from "./App";
+import MyRequests from './Requests/MyRequests';
 
 class Login extends Component {
 
@@ -104,6 +105,9 @@ class Login extends Component {
                     </div>
                 )}/>
                 <Route exact path="/App" render={() => (<App/>)}/>
+                <Route exact path="/Requests" render={() => (<MyRequests/>)}/>
+                {/* <Route exact path="/Messages" render={() => (<Messages/>)}/> */}
+                {/* <Route exact path="/Files" render={() => (<Messages/>)}/> */}
             </div>
         );
     }
