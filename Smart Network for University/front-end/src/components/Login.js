@@ -9,7 +9,6 @@ import Files from './Files/FileGrid';
 import {LoadFiles, LoadShared} from '../actions/files'
 import * as FilesAPI from '../api/GetFilesAPI';
 import PropTypes from 'prop-types';
-
 import Requests from './Requests/Requests';
 
 class Login extends Component {
@@ -113,24 +112,32 @@ class Login extends Component {
                                     }}/>
                                 </div>
                                 <div className="form-group">
+                                        {/* <label className="mr-sm-2" for="inlineFormCustomSelect">As :</label> */}
+                                        <select className="custom-select form-control mb-10 mr-sm-10 mb-sm-10" id="inlineFormCustomSelect">
+                                            <option value="0" selected>User</option>
+                                            <option value="1">Admin</option>
+                                            <option value="2">Super Admin</option>
+                                        </select>
+                                </div>
+                                <div className="form-group">
                                     <button
-                                        className="btn btn-primary"
+                                        className="btn btn-primary form-control"
                                         type="button"
                                         onClick={() => this.handleLogin()}>
-                                        Submit
+                                        Log In
                                     </button>
                                 </div>
                             </form>
-                            <p>Don't have an account yet? 
+                            {/* <p>Don't have an account yet? 
 	                	        <a href="Signup">Sign Up</a>
-	                        </p>
+	                        </p> */}
                         </div>
                     </div>
                 )}/>
                 <Route exact path="/App" render={() => (<App/>)}/>
                 {/* <Route exact path="/Messages" render={() => (<Messages/>)}/> */}
                  <Route exact path="/Files" render={() => (<Files/>)}/>
-                <Route exact path="/Requests" render={() => (<Requests/>)}/>
+                <Route exact path="/requests" render={() => (<Requests/>)}/>
             </div>
         );
     }
