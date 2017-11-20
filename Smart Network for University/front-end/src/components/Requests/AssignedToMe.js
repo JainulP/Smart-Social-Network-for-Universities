@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {Route, Link, Switch} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import SideNavBar from '../SideNavBar';
 import {LoadMyRequests} from '../../actions/requests';
 
-class MyRequests extends Component {
+class AssignedToMe extends Component {
 
     // createRequestList(){
     //     return this.props.myRequests.myRequests.map((requestItem) => {
@@ -51,7 +50,7 @@ class MyRequests extends Component {
                                 <th>Request</th>
                                 <th>Status</th>
                                 <th>Created Date</th>
-                                <th>Assigned To</th>
+                                <th>Created By</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,4 +80,4 @@ function mapDispatchToProps(dispatch){
     return bindActionCreators({LoadMyRequests : LoadMyRequests},dispatch);
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyRequests);
+export default AssignedToMe;

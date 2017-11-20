@@ -10,6 +10,7 @@ import {LoadFiles, LoadShared} from '../actions/files'
 import * as FilesAPI from '../api/GetFilesAPI';
 import PropTypes from 'prop-types';
 
+import Requests from './Requests/Requests';
 
 class Login extends Component {
 
@@ -127,9 +128,9 @@ class Login extends Component {
                     </div>
                 )}/>
                 <Route exact path="/App" render={() => (<App/>)}/>
-                <Route exact path="/Requests" render={() => (<MyRequests/>)}/>
                 {/* <Route exact path="/Messages" render={() => (<Messages/>)}/> */}
                  <Route exact path="/Files" render={() => (<Files/>)}/>
+                <Route exact path="/Requests" render={() => (<Requests/>)}/>
             </div>
         );
     }

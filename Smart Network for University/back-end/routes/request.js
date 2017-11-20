@@ -27,4 +27,32 @@ router.post('/getRequests', function (req, res, next) {
 	},getRequest);
 });
 
+router.post('/createRequest', function (req, res, next) {
+	
+		var reqsubject = req.body.subject;
+		var reqdescription = req.body.description;
+		var reqassignedTo = req.body.assignedTo;
+		var reqdepartment = req.body.department;
+		var generatedDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+		var reqcreatedby = 1;
+
+		var createRequest = "INSERT INTO requests(description, assignedto, createdby, departmentid, generated_date, resolved_date) Values ('"+reqdescription+"','"+reqassignedTo+"','"+reqcreatedby+"','"+reqdepartment+"', '"+generatedDate+"', '"+generatedDate+"')";
+		console.log("query is :" +createRequest);
+		
+		mysql.fetchData(function(err, result){
+			if(err){
+				throw err;
+			}
+			else{
+				if(err){
+					throw err;
+				}
+				else{
+					console.log('Request Created');
+					res.status(200).json({message: "Request creation successful"});
+				}
+			}
+		},createRequest);
+	});
+
 module.exports = router;
