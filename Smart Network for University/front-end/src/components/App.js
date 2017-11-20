@@ -7,11 +7,8 @@ import {connect} from 'react-redux';
 // './Files/FilesHome';
 import Requests from './Requests/Requests';
 import Home from './Home';
-<<<<<<< f74486493ae2891488be6c2a1da42d1e522720a8
 import SideNavBar from './SideNavBar';
-=======
 import '../public/style.css'
->>>>>>> Adding components for request functionality
 
 class App extends Component {
 
@@ -56,39 +53,9 @@ class App extends Component {
                     </div>
                 </nav>
 
-<<<<<<< f74486493ae2891488be6c2a1da42d1e522720a8
                 <div className="container-fluid" >
                     <div className="row sidemenu">
                         <SideNavBar/>
-=======
-                <div>
-                    <div className="row">
-                        <div className="col-sm-3 col-md-2">
-                        <nav id="navsidebar" className="hidden-xs-down bg-faded sidebar">
-                            <ul className="nav nav-pills flex-column">
-                                <li className="nav-item">
-                                    <Link className="nav-link active" to="/App">Home
-                                        <span className="sr-only">(current)</span>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Messages'>Messages</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Files'>Files</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Requests'>Requests</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                        </div>
-                        <div className="col-sm-9 col-md-10 pt-3">
-                            
-                            
-                        </div>
-                        
->>>>>>> Adding components for request functionality
                     </div>
                 </div>
             </div>
