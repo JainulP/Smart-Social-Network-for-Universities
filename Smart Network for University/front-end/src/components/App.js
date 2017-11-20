@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 // './Files/FilesHome';
 import MyRequests from './Requests/MyRequests';
 import Home from './Home';
+import SideNavBar from './SideNavBar';
 
 class App extends Component {
 
@@ -50,29 +51,9 @@ class App extends Component {
                     </div>
                 </nav>
 
-                <div className="container-fluid">
-                    <div className="row">
-                        <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-                            <ul className="nav nav-pills flex-column">
-                                <li className="nav-item">
-                                    <Link className="nav-link active" to="/App">Home
-                                        <span className="sr-only">(current)</span>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Messages'>Messages</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Files'>Files</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Requests'>Requests</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                            
-                        </div>
+                <div className="container-fluid" >
+                    <div className="row sidemenu">
+                        <SideNavBar/>
                     </div>
                 </div>
             </div>
@@ -80,4 +61,16 @@ class App extends Component {
     }
 }
 
-export default App;
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({LoadFiles : LoadFiles, LoadShared: LoadShared}, dispatch);
+// }
+//
+// function mapStateToProps(state){
+//     return {
+//         userdetail: state.userdetail,
+//         files: state.directory
+//     }
+// }
+export default withRouter(App);
+//export default connect(mapStateToProps, mapDispatchToProps)(App);
+

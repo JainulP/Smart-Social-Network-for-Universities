@@ -9,6 +9,9 @@ var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
 var request = require('./routes/request');
+var files = require('./routes/files');
+var uploadFiles = require('./routes/uploadFiles');
+var communities = require('./routes/communities');
 
 
 var app = express();
@@ -32,6 +35,10 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/request', request);
+app.use('/files', files);
+app.use('/uploadFiles',uploadFiles);
+app.use('/communities',communities);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

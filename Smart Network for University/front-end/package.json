@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "*",
+    "crypto-js": "^3.1.9-1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.17",
-    "react-redux":"*",
-    "redux":"*",
-    "react-router-dom":"*"
+    "react-file-download": "^0.3.5",
+    "react-redux": "*",
+    "react-router-dom": "*",
+    "react-scripts": "^1.0.14",
+    "react-ionicons": "^1.5.9",
+    "redux": "*"
   },
   "scripts": {
     "start": "react-scripts start",

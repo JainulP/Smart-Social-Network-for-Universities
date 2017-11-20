@@ -5,6 +5,11 @@ import {connect} from 'react-redux';
 import * as LoginAPI from '../api/LoginAPI';
 import App from "./App";
 import MyRequests from './Requests/MyRequests';
+import Files from './Files/FileGrid';
+import {LoadFiles, LoadShared} from '../actions/files'
+import * as FilesAPI from '../api/GetFilesAPI';
+import PropTypes from 'prop-types';
+
 
 class Login extends Component {
 
@@ -14,7 +19,7 @@ class Login extends Component {
             Password: ''
         },
         isLoggedIn: false,
-        message: ''
+        message: '',
     };
 
     handleLogin = () => {
@@ -34,6 +39,23 @@ class Login extends Component {
                     isLoggedIn: true,
                     message: "Welcome to my App..!!"
                 });
+
+// var userId = 1;
+//                 FilesAPI.getFiles({userId})
+//                     .then((obj) => {
+//                     this.setState({
+//                         ...this.state,
+//                         files:obj
+//                     });
+//                         //this.props.LoadFiles(obj);
+//                     });
+//                 console.log("*******");
+//                 console.log(this.state);
+//                 console.log("*******");
+//                 FilesAPI.getSharedFiles({userId})
+//                     .then((obj) => {
+//                         //this.props.LoadShared(obj);
+//                     });
                 this.props.history.push("/App");
             } else if (status === 401) {
                 this.setState({
@@ -107,12 +129,15 @@ class Login extends Component {
                 <Route exact path="/App" render={() => (<App/>)}/>
                 <Route exact path="/Requests" render={() => (<MyRequests/>)}/>
                 {/* <Route exact path="/Messages" render={() => (<Messages/>)}/> */}
-                {/* <Route exact path="/Files" render={() => (<Messages/>)}/> */}
+                 <Route exact path="/Files" render={() => (<Files/>)}/>
             </div>
         );
     }
 }
 
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({LoadFiles : LoadFiles, LoadShared: LoadShared}, dispatch);
+// }
 
 
 export default withRouter(Login);

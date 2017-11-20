@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Route, Link, Switch} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import SideNavBar from '../SideNavBar';
 
 class MyRequests extends Component {
 
@@ -47,25 +48,8 @@ class MyRequests extends Component {
                 </nav>
 
                 <div className="container-fluid">
-                    <div className="row">
-                        <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-                            <ul className="nav nav-pills flex-column">
-                                <li className="nav-item">
-                                    <Link className="nav-link active" to="/App">Home
-                                        <span className="sr-only">(current)</span>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Messages'>Messages</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Files'>Files</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/Requests'>Requests</Link>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div className="row sidemenu">
+                        <SideNavBar/>
                         <div className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                              <h1>MyRequests</h1>
                              Add your components here
