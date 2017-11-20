@@ -9,17 +9,14 @@ var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
 
-var superAdmin = require('./routes/Admin/superAdmin');
-var addCommunity =require('./routes/Admin/addCommunity');
-var remCommunity =require('./routes/Admin/remCommunity');
-var remAdmin =require('./routes/Admin/remAdmin');
-var adminLogin = require('./routes/adminLogin');
-var addUser =require('./routes/addUser');
-var remUser =require('./routes/Admin/remUser');
-var listUsers =require('./routes/listUsers');
-
-
-
+var superAdmin = require('./routes/SuperAdmin/superAdmin');
+var addCommunity =require('./routes/SuperAdmin/addCommunity');
+var remCommunity =require('./routes/SuperAdmin/remCommunity');
+var remAdmin =require('./routes/SuperAdmin/remAdmin');
+var adminLogin = require('./routes/Admin/adminLogin');
+var addUser =require('./routes/Admin/addUser');
+var remUser =require('./routes/SuperAdmin/remUser');
+var listUsers =require('./routes/Admin/listUsers');
 
 
 var request = require('./routes/request');
