@@ -9,12 +9,14 @@ import AssignedToMe from './AssignedToMe';
 import NewRequest from './NewRequest';
 import Header from '../Header';
 import SideNavBar from '../SideNavBar';
+import * as RequestAPI from '../../api/RequestAPI';
+import {LoadMyRequests, LoadAssignedRequests} from '../../actions/requests';
 
 class Requests extends Component {
+    
 
     render() {
         return (
-
             <div>
                 <Header/>
                 <div>
@@ -59,4 +61,16 @@ class Requests extends Component {
     }
 }
 
-export default Requests;
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({LoadMyRequests: LoadMyRequests,LoadAssignedRequests : LoadAssignedRequests},dispatch);
+}
+
+function mapStateToProps(state){
+    return {
+        myRequests: state.myRequests,
+        assignedRequests : state.myRequests
+    }
+}
+
+export default connect(mapDispatchToProps)(Requests);

@@ -18,3 +18,33 @@ export const createRequest = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const getRequest = (payload) =>
+    fetch(`${api}/request/getRequest`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getAssignedToMe = (payload) =>
+    fetch(`${api}/request/getAssignedToMe`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });

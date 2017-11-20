@@ -15,12 +15,17 @@ class NewRequests extends Component {
     };
 
     createRequest = () => {
-
+        var userId = "t@gmail.com";
         RequestAPI
             .createRequest(this.state)
             .then((status) => {
                 if (status === 200) {
                     console.log("Request Created!");
+                    RequestAPI
+                    .getRequest({userId})
+                    .then((obj) => {
+                        this.props.LoadMyRequests(obj);
+                });
                 } else if (status === 400) {
                     console.log("Unable to create request!");
                 }
@@ -96,4 +101,15 @@ class NewRequests extends Component {
     }
 }
 
-export default NewRequests;
+function mapStateToProps(state){
+    return {
+        myRequests: state.myrequests,
+        assignedRequests : state.assignedrequests
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({LoadMyRequests: LoadMyRequests},dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRequests);

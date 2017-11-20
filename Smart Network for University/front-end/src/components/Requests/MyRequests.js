@@ -3,41 +3,48 @@ import {Route, Link, Switch} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import SideNavBar from '../SideNavBar';
-import {LoadMyRequests} from '../../actions/requests';
+import * as RequestAPI from '../../api/RequestAPI';
+import {LoadMyRequests, LoadAssignedRequests} from '../../actions/requests';
 
 class MyRequests extends Component {
 
-    // createRequestList(){
-    //     return this.props.myRequests.myRequests.map((requestItem) => {
-    //         return(
-    //                 <tr>
-    //                     <td width = "30">
-    //                         {this.renderIcon(requestItem)}
-    //                     </td>
-    //                     <td>
-    //                         <button
-    //                             className="c-btn c-btn--tertiary--3"
-    //                             type="button"
-    //                             onClick={() => this.handleClick(requestItem)}>
-    //                                 {requestItem.Name}
-    //                         </button>
-    //                     </td>
-    //                     <td width = "40">
-    //                         {this.renderStarButton(requestItem)}
-    //                     </td>
-    //                     <td width = "40">
-    //                         <button className="c-btn c-btn--tertiary" onClick={() => this.openShare(requestItem)}>
-    //                             SHARE
-    //                         </button>
-    //                     </td>
-    //                     <td width = "40">
-    //                         <button className="c-btn c-btn--tertiary--2">
-    //                         </button>
-    //                     </td>
-    //                 </tr>
-    //         );
-    //     });
-    // }
+    componentWillMount() {
+        var userId = "t@gmail.com";
+        RequestAPI.getRequest({userId})
+            .then((obj) => {
+                this.props.LoadMyRequests(obj);
+            });
+        RequestAPI.getAssignedToMe({userId})
+            .then((obj) => {
+                this.props.LoadAssignedRequests(obj);
+            });
+    }
+
+    createRequestList(){
+        if(this.props.myRequests.myrequests){
+        return this.props.myRequests.myrequests.map((requestItem) => {
+            return(
+                    <tr>
+                        <td width = "30">
+                            {requestItem.requestid}
+                        </td>
+                        <td>
+                            {requestItem.description}
+                        </td>
+                        <td width = "60">
+                            {requestItem.status}
+                        </td>
+                        <td width = "60">
+                            {requestItem.assignedto}
+                        </td>
+                        <td width = "60">
+                            {requestItem.generated_date}
+                        </td>
+                    </tr>
+            );
+        });
+    }
+    }
 
     render() {
         return (
@@ -50,19 +57,19 @@ class MyRequests extends Component {
                                 <th>ReqId</th>
                                 <th>Request</th>
                                 <th>Status</th>
-                                <th>Created Date</th>
                                 <th>Assigned To</th>
+                                <th>Created Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* this.createRequestList() */}
-                            <tr onClick={(event) => {alert("rowclicked");}}>
+                            {this.createRequestList()}
+                            {/* <tr onClick={(event) => {alert("rowclicked");}}>
                                 <td>1</td>
                                 <td>Lorem</td>
                                 <td>ipsum</td>
                                 <td>dolor</td>
                                 <td>sit</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>
@@ -71,14 +78,15 @@ class MyRequests extends Component {
     }
 }
 
-function mapStateToProps(state){
-    return {
-        myRequests: state.myRequests
-    }
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({LoadMyRequests: LoadMyRequests,LoadAssignedRequests : LoadAssignedRequests},dispatch);
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({LoadMyRequests : LoadMyRequests},dispatch);
-  }
+function mapStateToProps(state){
+    return {
+        myRequests: state.myrequests,
+        assignedRequests : state.assignedrequests
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyRequests);
