@@ -4,8 +4,23 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const getCommunties = (payload) =>
-    fetch(`${api}/communities/getCommunities`, {
+export const createRequest = (payload) =>
+    fetch(`${api}/request/createRequest`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getRequest = (payload) =>
+    fetch(`${api}/request/getRequest`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -19,8 +34,8 @@ export const getCommunties = (payload) =>
         return error;
     });
 
-export const getAllCommunties = (payload) =>
-    fetch(`${api}/communities/getAllCommunities`, {
+export const getAssignedToMe = (payload) =>
+    fetch(`${api}/request/getAssignedToMe`, {
         method: 'POST',
         headers: {
             ...headers,

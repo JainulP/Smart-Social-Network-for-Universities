@@ -65,4 +65,27 @@ router.post('/getCommunities', function (req, res, next) {
     },getCommunity);
 });
 
+router.post('/getAllCommunities', function (req, res, next) {
+    
+        var reqUserId = req.body.userId;
+    
+        var getCommunity = "SELECT * FROM department";
+        console.log("query is :" +getCommunity);
+    
+        mysql.fetchData(function(err, result){
+            if(err){
+                throw err;
+            }
+            else{
+                if(result.length>0){
+                    res.status(201).json({result});
+                }
+                else
+                {
+                    res.status(401).json({message: "Error"});
+                }
+            }
+        },getCommunity);
+    });
+
 module.exports = router;

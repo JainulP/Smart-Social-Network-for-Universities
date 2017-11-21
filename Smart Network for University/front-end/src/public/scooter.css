@@ -81,18 +81,20 @@ input[type=radio] {
   /* Till here */
 
 ul, ol {
-  margin-left: 46px; }
+  /* margin-left: 46px;  */
+  margin-left: 0px;
+}
 
 p, table {
   margin-bottom: 23px; }
 
 table {
   border-collapse: collapse; }
-
+/* 
 html, :root {
   box-sizing: border-box;
   font: 81.25%/1.75 "Open Sans", "Helvetica Neue", Arial, sans-serif;
-  color: #3d464d; }
+  color: #3d464d; } */
 
 .f-headline, .f-subhead,
 .f1, .f2, .f3, .f4 {
@@ -770,6 +772,7 @@ hr {
   .c-btn.c-btn--tertiary--2 {
     color: #007ee5;
     font-weight: 500;
+    padding: 0px 0px;
     border-color: #007ee5;
     background-color: transparent;}
   .c-btn.c-btn--tertiary--3 {

@@ -5,9 +5,10 @@ var mysql = require("./mysql");
 router.post('/doLogin', function (req, res, next) {
 
 	var reqUsername = req.body.EmailId;
-    var reqPassword = req.body.Password;
+	var reqPassword = req.body.Password;
+	var reqUserType = req.body.UserType;
 
-    var getUser = "SELECT * FROM user WHERE emailid = '"+reqUsername+"' and password = '"+reqPassword+"'";
+    var getUser = "SELECT * FROM user WHERE emailid = '"+reqUsername+"' and password = '"+reqPassword+"' and type = '"+reqUserType+"' ";
 	console.log("query is :" +getUser);
 	
 	mysql.fetchData(function(err, result){
@@ -17,7 +18,7 @@ router.post('/doLogin', function (req, res, next) {
 		else{
 			if(result.length>0){
 				console.log('Valid Login');
-				res.status(201).json({message: "Login Succcessful"});
+				res.status(201).json({message: "Login Successful"});
 			}
 			else
 			{

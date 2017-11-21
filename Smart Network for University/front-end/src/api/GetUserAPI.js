@@ -4,8 +4,8 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const addUser = (payload) =>
-    fetch(`${api}/addUser/addUser`, {
+export const getUser = (payload) =>
+    fetch(`${api}/user/getUser`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -13,9 +13,8 @@ export const addUser = (payload) =>
         },
         body: JSON.stringify(payload)
     }).then(res => {
-        return res.status;
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
+        return res.json();
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });

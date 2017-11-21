@@ -4,6 +4,7 @@ export const LOAD_SHARED = 'LOAD_SHARED';
 export const INITIALIZE_SHARED = 'INITIALIZE_SHARED';
 export const UPDATE_SHARED = 'UPDATE_SHARED';
 export const LOAD_USER_DEPARTMENTS = 'LOAD_USER_DEPARTMENTS';
+export const LOAD_DEPARTMENTS = 'LOAD_DEPARTMENTS';
 
 
 export function InitializeState(obj) {
@@ -51,6 +52,14 @@ export function LoadUserDepartments(obj) {
     console.log("departments Loaded");
     return {
         type : "LOAD_USER_DEPARTMENTS",
+        obj                               // this is same as newItem : newItem in ES6
+    }
+}
+
+export function LoadDepartments(obj) {
+    console.log("departments Loaded");
+    return {
+        type : "LOAD_DEPARTMENTS",
         obj                               // this is same as newItem : newItem in ES6
     }
 }

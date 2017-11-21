@@ -2,18 +2,15 @@ var express = require('express');
 var router = express.Router();
 var mysql = require("../mysql")
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
-});
 
 router.post('/remCom', function (req, res, next) {
 
 
-    var reqDepartmentName = req.body.dep_name;
+    var reqDepartmentId = req.body.dep.departmentid;
+    console.log("#$#$#$#$#$#$#$#$#$#"+reqDepartmentId);
 
 
-    var remDepartment = "Delete FROM Department WHERE Dep_Name='"+reqDepartmentName+"'";
+    var remDepartment = "Delete FROM department WHERE departmentid='"+reqDepartmentId+"'";
 
     mysql.fetchData(function(err, result){
         if(err){

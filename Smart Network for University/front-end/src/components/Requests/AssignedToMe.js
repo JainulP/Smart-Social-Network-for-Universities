@@ -2,18 +2,14 @@ import React, {Component} from 'react';
 import {Route, Link, Switch} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import SideNavBar from '../SideNavBar';
-import * as RequestAPI from '../../api/RequestAPI';
 import {LoadMyRequests, LoadAssignedRequests} from '../../actions/requests';
+import * as RequestAPI from '../../api/RequestAPI';
 
-class MyRequests extends Component {
 
-    componentWillMount() {
-        var userId = "t@gmail.com";
-        RequestAPI.getRequest({userId})
-            .then((obj) => {
-                this.props.LoadMyRequests(obj);
-            });
+class AssignedToMe extends Component {
+
+    componentDidMount() {
+        var userId = 1;
         RequestAPI.getAssignedToMe({userId})
             .then((obj) => {
                 this.props.LoadAssignedRequests(obj);
@@ -21,8 +17,8 @@ class MyRequests extends Component {
     }
 
     createRequestList(){
-        if(this.props.myRequests.myrequests){
-        return this.props.myRequests.myrequests.map((requestItem) => {
+        if(this.props.assignedRequests.assignedrequests){
+        return this.props.assignedRequests.assignedrequests.map((requestItem) => {
             return(
                     <tr>
                         <td width = "30">
@@ -35,7 +31,7 @@ class MyRequests extends Component {
                             {requestItem.status}
                         </td>
                         <td width = "60">
-                            {requestItem.assignedto}
+                            {requestItem.createdby}
                         </td>
                         <td width = "60">
                             {requestItem.generated_date}
@@ -49,7 +45,7 @@ class MyRequests extends Component {
     render() {
         return (
             <div>
-                <h3>My Requests</h3>
+                {/* <h3>My Requests</h3> */}
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -57,7 +53,7 @@ class MyRequests extends Component {
                                 <th>ReqId</th>
                                 <th>Request</th>
                                 <th>Status</th>
-                                <th>Assigned To</th>
+                                <th>Created By</th>
                                 <th>Created Date</th>
                             </tr>
                         </thead>
@@ -78,10 +74,6 @@ class MyRequests extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({LoadMyRequests: LoadMyRequests,LoadAssignedRequests : LoadAssignedRequests},dispatch);
-}
-
 function mapStateToProps(state){
     return {
         myRequests: state.myrequests,
@@ -89,4 +81,8 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyRequests);
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({LoadAssignedRequests : LoadAssignedRequests},dispatch);
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps)(AssignedToMe);
