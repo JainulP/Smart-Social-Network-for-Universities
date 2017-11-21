@@ -4,34 +4,34 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as LoginAPI from '../api/LoginAPI';
 import App from "./App";
-import MyRequests from './Requests/MyRequests';
 import Files from './Files/FileGrid';
-import {LoadFiles, LoadShared} from '../actions/files'
-import * as FilesAPI from '../api/GetFilesAPI';
-import PropTypes from 'prop-types';
+import {LoadUser} from '../actions/user'
+import * as UserAPI from '../api/GetUserAPI';
 import Requests from './Requests/Requests';
+import Messages from './Messages/Message';
+import AdminHome from './AdminHome';
+import SuperAdminHome from './SuperAdminHome';
 
 class Login extends Component {
 
     state = {
         userdata: {
             EmailId: '',
-            Password: ''
+            Password: '',
+            UserType: 0
         },
         isLoggedIn: false,
         message: '',
     };
 
     handleLogin = () => {
-        
-
         var payload;
+        var userType = this.state.userdata.UserType;
         payload = {
             EmailId:this.state.userdata.EmailId,
-            Password:this.state.userdata.Password
+            Password:this.state.userdata.Password,
+            UserType: this.state.userdata.UserType
         }
-
-
         LoginAPI.doLogin(payload)
         .then((status) => {
             if (status === 201) {
@@ -39,24 +39,21 @@ class Login extends Component {
                     isLoggedIn: true,
                     message: "Welcome to my App..!!"
                 });
-
-// var userId = 1;
-//                 FilesAPI.getFiles({userId})
-//                     .then((obj) => {
-//                     this.setState({
-//                         ...this.state,
-//                         files:obj
-//                     });
-//                         //this.props.LoadFiles(obj);
-//                     });
-//                 console.log("*******");
-//                 console.log(this.state);
-//                 console.log("*******");
-//                 FilesAPI.getSharedFiles({userId})
-//                     .then((obj) => {
-//                         //this.props.LoadShared(obj);
-//                     });
-                this.props.history.push("/App");
+                var emailId = this.state.userdata.EmailId;
+                UserAPI.getUser({emailId})
+                .then((obj) => {       
+                        this.props.LoadUser(obj);
+                        if (typeof(Storage) !== "undefined") {
+                            localStorage.UserId = obj.userid;
+                            localStorage.EmailId = obj.emailid;
+                            if(userType == 0)
+                                this.props.history.push("/App");
+                            else if(userType == 1)
+                                this.props.history.push("/AdminHome");
+                            else if(userType == 2)
+                                this.props.history.push("/SuperAdminHome");
+                        }
+                    });
             } else if (status === 401) {
                 this.setState({
                     isLoggedIn: false,
@@ -113,7 +110,15 @@ class Login extends Component {
                                 </div>
                                 <div className="form-group">
                                         {/* <label className="mr-sm-2" for="inlineFormCustomSelect">As :</label> */}
-                                        <select className="custom-select form-control mb-10 mr-sm-10 mb-sm-10" id="inlineFormCustomSelect">
+                                        <select className="custom-select form-control mb-10 mr-sm-10 mb-sm-10" id="inlineFormCustomSelect"
+                                            onChange={(event) => {
+                                                this.setState({
+                                                    userdata:{
+                                                        ...this.state.userdata,
+                                                        UserType: event.target.value
+                                                    }
+                                                });
+                                            }}>
                                             <option value="0" selected>User</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Super Admin</option>
@@ -138,14 +143,23 @@ class Login extends Component {
                 {/* <Route exact path="/Messages" render={() => (<Messages/>)}/> */}
                  <Route exact path="/Files" render={() => (<Files/>)}/>
                 <Route exact path="/requests" render={() => (<Requests/>)}/>
+                <Route exact path="/Messages" render={() => (<Messages/>)}/>
+                <Route exact path="/AdminHome" render={() => (<AdminHome/>)}/>
+                <Route exact path="/SuperAdminHome" render={() => (<SuperAdminHome/>)}/>
             </div>
         );
     }
 }
 
-// function mapDispatchToProps(dispatch){
-//     return bindActionCreators({LoadFiles : LoadFiles, LoadShared: LoadShared}, dispatch);
-// }
+function mapStateToProps(state){
+    return {
+        userdetail: state.userdetail
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({LoadUser : LoadUser}, dispatch);
+}
 
 
-export default withRouter(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

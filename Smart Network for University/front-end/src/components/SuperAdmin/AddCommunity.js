@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import { Route, withRouter} from 'react-router-dom';
 //import './../public/scooter.css';
 //import Login from './Login';
-import * as AddComAPI from './../api/AddComAPI';
-import RemCommunity from "./RemCommunity";
+import * as AddComAPI from '../../api/AddComAPI';
 //import RemCommunity from '../components/RemCommunity';
+import * as CommunityAPI from '../../api/CommunityAPI';
+import { LoadDepartments } from '../../actions/files';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 
 class AddCommunity extends Component {
 
     state = {
         departmentdata: {
-            dep_name: '',
-            dep_admin: ''
+            dep_name: ''
+            // dep_admin: ''
         },
         isAdded : ''
     };
@@ -24,7 +27,10 @@ class AddCommunity extends Component {
                     this.setState({
                         isAdded: true,
                     });
-                    this.props.history.push("/RemCommunity");
+                    CommunityAPI.getAllCommunties()
+                    .then((obj) => {
+                        this.props.LoadDepartments(obj);
+                    });
                 }
                 else if (status === 401) {
                     this.setState({
@@ -37,15 +43,10 @@ class AddCommunity extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <Route
-                    exact
-                    path="/AddCommunity"
-                    render={() => (
-                        <div className="row justify-content-md-center">
-                            <div className="col-md-3">
+               
                                 <form>
                                     <div className="form-group">
-                                        <h3>Add Department/Admin</h3>
+                                        <h3>Add Department</h3>
                                     </div>
                                     <div className="form-group">
                                         <input
@@ -64,22 +65,6 @@ class AddCommunity extends Component {
                                             }}/>
                                     </div>
                                     <div className="form-group">
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            label="dep_admin"
-                                            placeholder="Department Admin"
-                                            value={this.state.departmentdata.dep_admin}
-                                            onChange={(event) => {
-                                                this.setState({
-                                                    departmentdata: {
-                                                        ...this.state.departmentdata,
-                                                        dep_admin: event.target.value
-                                                    }
-                                                });
-                                            }}/>
-                                    </div>
-                                    <div className="form-group">
                                         <button
                                             className="btn btn-primary"
                                             type="button"
@@ -88,13 +73,23 @@ class AddCommunity extends Component {
                                         </button>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-                    )}/>
-                <Route exact path="/RemCommunity" render={() => (<RemCommunity/>)}/>
+                            
             </div>
         );
     }
 }
 
-export default withRouter(AddCommunity);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        LoadDepartments: LoadDepartments
+    }, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        userdetail: state.userdetail,
+        members: state.members
+    }       
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCommunity);

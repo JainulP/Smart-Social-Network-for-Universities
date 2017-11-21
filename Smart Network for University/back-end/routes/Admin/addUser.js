@@ -2,19 +2,15 @@ var express = require('express');
 var router = express.Router();
 var mysql = require("../mysql")
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
-});
-
-router.post('/adUser', function (req, res, next) {
+router.post('/addUser', function (req, res, next) {
 
     var reqFirstname = req.body.firstname;
     var reqLastname = req.body.lastname;
     var reqEmail = req.body.emailid;
     var reqPassword = req.body.password;
+    var reqDepartment = req.body.departmentid;
 
-    var addUser = "INSERT INTO Users(FirstName, LastName, EmailId, Password) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"')";
+    var addUser = "INSERT INTO user(firstname, lastname, emailid, password, departmentid, type, deleteflag) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"','"+reqDepartment+"',0,0)";
 
     mysql.fetchData(function(err, result){
         if(err){

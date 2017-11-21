@@ -48,6 +48,10 @@ class SideNavBar extends  Component{
                 <li className="nav-item">
                     <Link className="nav-link" to='/requests'>Requests</Link>
                 </li>
+                <br/>
+                <li className="nav-item">
+                    <Link className="nav-link" to='/'>Logout</Link>
+                </li>
             </ul>
         </nav>
         );

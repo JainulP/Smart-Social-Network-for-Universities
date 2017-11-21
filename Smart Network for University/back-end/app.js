@@ -8,6 +8,7 @@ var multer = require('multer');
 var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
+var user = require('./routes/user');
 
 var superAdmin = require('./routes/SuperAdmin/superAdmin');
 var addCommunity =require('./routes/SuperAdmin/addCommunity');
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/login', login);
 app.use('/signup', signup);
+app.use('/user', user);
 
 app.use('/superAdmin', superAdmin);
 app.use('/addCommunity',addCommunity);

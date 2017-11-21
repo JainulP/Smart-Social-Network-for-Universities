@@ -18,3 +18,18 @@ export const getCommunties = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const getAllCommunties = (payload) =>
+    fetch(`${api}/communities/getAllCommunities`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });

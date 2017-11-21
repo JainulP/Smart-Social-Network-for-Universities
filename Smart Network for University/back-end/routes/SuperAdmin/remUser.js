@@ -2,18 +2,13 @@ var express = require('express');
 var router = express.Router();
 var mysql = require("../mysql")
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
-});
-
-router.post('/remUser', function (req, res, next) {
+router.post('/removeUser', function (req, res, next) {
 
 
-    var reqEmailId = req.body.emailid;
+    var reqUserId = req.body.member.userid;
 
 
-    var remDepartment = "Delete FROM User WHERE EmailId='"+reqEmailId+"'";
+    var remUser = "UPDATE user SET deleteflag = 1 WHERE userid='"+reqUserId+"'";
 
     mysql.fetchData(function(err, result){
         if(err){
@@ -23,7 +18,7 @@ router.post('/remUser', function (req, res, next) {
             console.log('Valid Remove');
             res.status(201).json({message: "User Removed successfully"});
         }
-    },remDepartment);
+    },remUser);
 });
 
 module.exports = router;

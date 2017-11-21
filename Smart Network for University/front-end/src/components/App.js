@@ -20,6 +20,10 @@ class App extends Component {
                         <div className="col-sm-3 col-md-2">
                             <SideNavBar/>
                         </div>
+                        <div className="col-sm-9 col-md-10 pt-3">
+                            <h2>Department of Software Engineering</h2>
+                            <h4>Announcements will appear here</h4>
+                        </div>
                     </div>
                 </div>
             </div>
