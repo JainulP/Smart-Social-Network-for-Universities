@@ -99,7 +99,7 @@ class RightMenu extends Component {
                             {
                                 this.props.departments.departments.map(department => (
 
-                             <option value={department.departmentid}>{department.departmentid}</option>
+                             <option value={department.departmentid}>{department.dep_name}</option>
                                 ))}
                         </select>
                         <button className = "c-btn c-btn--primary c-btn--full" onClick={()=>this.handleShared()}>Share</button>

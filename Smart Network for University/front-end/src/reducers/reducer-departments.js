@@ -10,7 +10,7 @@ const departments = (state = initialState, action) => {
 
         case LOAD_USER_DEPARTMENTS :
             state = {
-                departments: action.obj.result,
+                departments: action.obj.departments,
             };
             console.log(state);
             return state;

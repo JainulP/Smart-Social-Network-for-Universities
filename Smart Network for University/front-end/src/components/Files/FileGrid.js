@@ -80,35 +80,32 @@ class FileGrid extends Component {
     }
 
 
-    // createSharedList(){
-    //     if(this.props.shared.sharedfiles && this.props.shared.sharedfiles.length == 0)
-    //     {
-    //         return(
-    //                 <div class="c-banner c-banner--unpinned f4">
-    //                     Nothing has been shared with you for now.
-    //                 </div>
-    //             );
-    //         }
-    //     else{
-    //         return this.props.shared.sharedfiles.map((fileitem) => {
-    //             return(
-    //                     <tr>
-    //                         <td width = "30">
-    //                             {this.renderIcon(fileitem)}
-    //                         </td>
-    //                         <td>
-    //                             <button
-    //                                 className="c-btn c-btn--tertiary--3"
-    //                                 type="button"
-    //                                 onClick={() => this.handleClick(fileitem)}>
-    //                                     {fileitem.Name}
-    //                             </button>
-    //                         </td>
-    //                     </tr>
-    //                 );
-    //             });
-    //         }
-    // }
+    createSharedList(){
+        if(this.props.shared.sharedfiles && this.props.shared.sharedfiles.length == 0)
+        {
+            return(
+                    <div class="c-banner c-banner--unpinned f4">
+                        Nothing has been shared with you for now.
+                    </div>
+                );
+            }
+        else{
+                return(
+                    <div>
+                        <h2 className="header category">Shared with me</h2>
+                        <ul className="list-group">
+                            {
+                                this.props.shared.sharedfiles.map(file => (
+                                    <li className="list-group-item" key={file.filename}>
+                                        <span className="ion-document-text"></span>
+                                        <span className="listContent"   onClick={() => this.handleClick(file)}>{file.filename}</span>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                    );
+            }
+    }
 
 
 
@@ -159,6 +156,9 @@ class FileGrid extends Component {
                         <main role="main" className="col-sm-10">
                             <h1 className="header col-sm-8">Files</h1>
                             <div className="col-sm-9">
+                                {this.createSharedList()}
+                            </div>
+                            <div className="col-sm-9">
                                 <div>
                                     <h2 className="header category">My Files</h2>
                                     <ul className="list-group">
@@ -177,6 +177,7 @@ class FileGrid extends Component {
                                     </ul>
                                 </div>
                             </div>
+
                             <div className="col-sm-3 rightBlock">
                             <RightMenu/>
                             </div>

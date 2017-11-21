@@ -49,7 +49,6 @@ router.post('/downloadFile', function (req, res, next) {
 		var reqFileName = req.body.filename;
 		var reqFilePath = req.body.path;
 
-		console.log("---------------------");
 		console.log(reqFilePath);
 		console.log(reqFileName);
 
@@ -62,49 +61,48 @@ router.get('/downloadFile', function (req, res, next) {
 	});
 
 router.post('/getSharedFiles', function (req, res, next) {
-    	var reqUserId = 1;
+    	var reqUserId = 3;
 		//var reqUserId = req.body.userId;
 		var getShared='';
-		var getCommunities = '';
+		var getDepartments = '';
     var filelist = [];
 
-    getCommunities = "SELECT departmentid FROM user_dep_mapping WHERE userid = '"+reqUserId+"'";
-    getShared = "SELECT * FROM files WHERE departments IS NOT NULL";
+    getDepartments = "SELECT departmentid FROM user_dep_mapping WHERE userid = '"+reqUserId+"'";
+    getShared = "SELECT * FROM files WHERE departments IS NOT NULL AND uploadedby != "+ reqUserId;
+
+    console.log("getDepartments",getDepartments);
+    console.log("getShared",getShared);
     mysql.fetchData(function(err, result1){
             if(err){
                 throw err;
             }
             else{
 
-                console.log("res length "+ result1.length);
-                // for(var j=0; j <result1.length ; j++){
-                //     var commId = result1[j].CommunityId;
-                //     console.log(commId);
-                //     qqw.push(commId);
                     mysql.fetchData(function(err, result){
                         if(err){
                             throw err;
                         }
                         else{
                         	if(result1.length>0) {
+
                                 console.log('Valid shared files');
                                 for(var j=0; j <result1.length ; j++) {
                                     var deptId = result1[j].departmentid;
-                                   // var filelist = [];
+
                                     var departments;
                                     for (var i = 0; i < result.length; i++) {
                                         departments = result[i].departments;
 
                                         var arrDepartments = departments.split(",");
 
-                                        // console.log("arrMembers" + JSON.stringify(arrMembers));
+                                         console.log("arrDepartments" + JSON.stringify(arrDepartments));
                                         // console.log("position"  +commId+ " is " + arrMembers.indexOf(commId.toString()));
                                         if (arrDepartments.indexOf(deptId.toString()) >= 0  && result[i].userid != reqUserId) {
                                             filelist.push(result[i])
                                         }
                                     }
                                     //console.log(result1[j].CommunityId);
-                                    console.log("======");
+                                    console.log("======+++++++");
                                     console.log(JSON.stringify(filelist));
 
                                 }
@@ -114,167 +112,8 @@ router.post('/getSharedFiles', function (req, res, next) {
 
                         }
                     },getShared);
-
-                    //console.log(result1[j].CommunityId);
                 }
-
-
-
-        },getCommunities);
-
-
-
-
-
-   // Select * from directory where members in(SELECT CommunityId FROM usercommunity WHERE UserId = 17)
-	    //getCommunities = "SELECT CommunityId FROM usercommunity WHERE UserId = '"+reqUserId+"'";
-// 		getShared = "SELECT * FROM Directory WHERE Members IS NOT NULL";
-// console.log("get communities "+getCommunities);
-//     console.log("get shared "+getShared);
-//     mysql.fetchData(function(err, result1){
-//         if(err){
-//             throw err;
-//         }
-//         else{
-//
-// console.log("res length "+ result1.length);
-//             for(var j=0; j <result1.length ; j++){
-//    var commId = result1[j].CommunityId;
-//    console.log(commId);
-//    qqw.push(commId);
-//                 // mysql.fetchData(function(err, result){
-//                 //     if(err){
-//                 //         throw err;
-//                 //     }
-//                 //     else{
-//                 //         console.log('Valid shared files');
-//                 //         // var filelist = [];
-//                 //         var members;
-//                 //         for(var i=0; i<result.length; i++){
-//                 //             members = result[i].Members;
-//                 //
-//                 //             var arrMembers = members.split(",");
-//                 //
-//                 //             console.log("arrMembers"+ JSON.stringify(arrMembers));
-//                 //             console.log("position"+ commId+" is "+ arrMembers.indexOf(commId));
-//                 //             if(arrMembers.indexOf(commId)>=0){
-//                 //                 filelist.push(result[i])
-//                 //             }
-//                 //         }
-//                 //         //console.log(result1[j].CommunityId);
-//                 //         console.log("======", filelist);
-// 					// 	console.log(filelist);
-//                 //
-//                 //
-//                 //     }
-//                 // },getShared);
-//                 //console.log(result1[j].CommunityId);
-//             }
-//
-//
-//         }
-//     },getCommunities);
-
-    // Promise.resolve( mysql.fetchData(function(err, result1){
-    //     if(err){
-    //         throw err;
-    //     }
-    //     else{
-    //
-    //         console.log("res length "+ result1.length);
-    //         for(var j=0; j <result1.length ; j++){
-    //             var commId = result1[j].CommunityId;
-    //             console.log(commId);
-    //             qqw.push(commId);
-    //             // mysql.fetchData(function(err, result){
-    //             //     if(err){
-    //             //         throw err;
-    //             //     }
-    //             //     else{
-    //             //         console.log('Valid shared files');
-    //             //         // var filelist = [];
-    //             //         var members;
-    //             //         for(var i=0; i<result.length; i++){
-    //             //             members = result[i].Members;
-    //             //
-    //             //             var arrMembers = members.split(",");
-    //             //
-    //             //             console.log("arrMembers"+ JSON.stringify(arrMembers));
-    //             //             console.log("position"+ commId+" is "+ arrMembers.indexOf(commId));
-    //             //             if(arrMembers.indexOf(commId)>=0){
-    //             //                 filelist.push(result[i])
-    //             //             }
-    //             //         }
-    //             //         //console.log(result1[j].CommunityId);
-    //             //         console.log("======", filelist);
-    //             // 	console.log(filelist);
-    //             //
-    //             //
-    //             //     }
-    //             // },getShared);
-    //             //console.log(result1[j].CommunityId);
-    //         }
-    //
-    //
-    //     }
-    // },getCommunities))
-    //     .then(() =>{
-    // 	console.log("promis resolves");
-    // 	console.log(result1);
-    //         //var userDetail = this.props.userdetail;
-    //
-    //     });
-		// mysql.fetchData(function(err, result){
-		// 	if(err){
-		// 		throw err;
-		// 	}
-		// 	else{
-		// 		console.log('Valid shared files');
-		// 		var filelist = [];
-		// 		var members;
-		// 		for(var i=0; i<result.length; i++){
-		// 			members = result[i].Members;
-		// 			var arrMembers = members.split(",");
-		// 			if(arrMembers.indexOf(reqUserId)>=0){
-		// 				filelist.push(result[i])
-		// 			}
-		// 		}
-		// 		console.log("======", filelist);
-		// 		res.status(201).json( {filelist});
-		// 	}
-		// },getShared);
-
-
-// if(qqw.length> 0) {
-// 	console.log("**************");
-//     mysql.fetchData(function (err, result) {
-//         if (err) {
-//             throw err;
-//         }
-//         else {
-//             console.log('Valid shared files');
-//             // var filelist = [];
-//             var members;
-//             for (var i = 0; i < result.length; i++) {
-//                 members = result[i].Members;
-//
-//                 var arrMembers = members.split(",");
-//
-//                 console.log("arrMembers" + JSON.stringify(arrMembers));
-//                 console.log("position" + commId + " is " + arrMembers.indexOf(commId));
-//                 if (arrMembers.indexOf(commId) >= 0) {
-//                     filelist.push(result[i])
-//                 }
-//             }
-//             //console.log(result1[j].CommunityId);
-//             console.log("======", filelist);
-//             console.log(filelist);
-//
-//
-//         }
-//     }, getShared);
-// }
-
+        },getDepartments);
 	});
 
 router.post('/setSharing', function (req, res, next) {
