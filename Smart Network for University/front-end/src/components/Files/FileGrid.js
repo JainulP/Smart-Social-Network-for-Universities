@@ -3,12 +3,11 @@ import {withRouter} from 'react-router-dom';
 import '../../public/scooter.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import starred from '../../public/starred.svg';
-import star from '../../public/star_white.svg';
 import file from '../../public/file.svg';
 import {UpdateShared} from '../../actions/files';
 import * as CommunityAPI from '../../api/CommunityAPI';
 import * as FilesAPI from '../../api/GetFilesAPI';
+import * as UpdateFilesAPI from '../../api/UpdateFileAPI';
 import * as DownloadAPI from '../../api/DownloadFileAPI';
 import fileDownload from 'react-file-download';
 import Axios from 'axios';
@@ -17,6 +16,7 @@ import RightMenu from './RightMenu';
 import '../../CSS/homepagecss.css';
 import '../../CSS/homePage.css';
 import {LoadFiles, LoadShared,LoadUserDepartments} from '../../actions/files';
+import Header from '../Header';
 
 class FileGrid extends Component {
 
@@ -79,14 +79,31 @@ class FileGrid extends Component {
         this.props.UpdateShared(fileitem);
     }
 
+    handleDelete(fileitem){
+        var userId = 1;
+        console.log(fileitem);
+        UpdateFilesAPI.deleteFile(fileitem)
+            .then((res) =>
+            { FilesAPI.getFiles({userId})
+            .then((obj) => {
+                this.props.LoadFiles(obj);
+            });
+
+        });
+
+    }
+
 
     createSharedList(){
         if(this.props.shared.sharedfiles && this.props.shared.sharedfiles.length == 0)
         {
             return(
-                    <div class="c-banner c-banner--unpinned f4">
+                <div>
+                <h2 className="header category">Shared with me</h2>
+                    <div className="c-banner">
                         Nothing has been shared with you for now.
                     </div>
+                </div>
                 );
             }
         else{
@@ -108,80 +125,86 @@ class FileGrid extends Component {
     }
 
 
+    createMyFilesList(){
+        if(this.props.files.files && this.props.files.files.length == 0)
+        {
+            return(
+                <div>
+                    <h2 className="header category">My Files</h2>
+                    <div className="c-banner">
+                        Nothing has been uploaded by you.
+                    </div>
+                </div>
+            );
+        }
+        else{
+            return(
+                <div>
+                    <h2 className="header category">My Files</h2>
+                    <ul className="list-group">
+                        {
+                            this.props.files.files.map(file => (
+                                <li className="list-group-item" key={file.filename}>
+                                    <span className="ion-document-text col-sm-0.1"></span>
+                                    <span className="listContent col-sm-10"   onClick={() => this.handleClick(file)}>{file.filename}</span>
+                                    <div className="btn-group pull-right col-sm-1" role="group" aria-label="Basic example">
+                                        <button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>
+                                        <button type="button" className="btn btn-secondary btnshare ion-ios-trash" onClick = {() => this.handleDelete(file)}></button>
+
+                                    </div>
+                                </li>
+                            ))}
+                    </ul>
+                </div>
+            );
+        }
+    }
+
 
     render() {
         return (
             <div>
-                <nav
-                    className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-                    <button
-                        className="navbar-toggler navbar-toggler-right hidden-lg-up"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarsExampleDefault"
-                        aria-controls="navbarsExampleDefault"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <a className="navbar-brand" href="#">Dashboard</a>
+                <Header/>
 
-                    <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">Home
-                                    <span className="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Settings</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Profile</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Help</a>
-                            </li>
-                        </ul>
-                        <form className="form-inline mt-2 mt-md-0">
-                            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
 
-                <div className="container-fluid">
-                    <div className="row sidemenu">
-                    <SideNavBar/>
-                        <main role="main" className="col-sm-10">
-                            <h1 className="header col-sm-8">Files</h1>
-                            <div className="col-sm-9">
+                <div>
+                        <div className="row">
+                            <div className="col-sm-3 col-md-2">
+                                <SideNavBar/>
+                            </div>
+                            {/*<div className="row col-sm-9 col-md-10 pt-3">*/}
+                        <main role="main" className="row col-sm-7 col-md-7 pt-3">
+                            <h1 className="header col-sm-12">Files</h1>
+                            <div className="col-sm-12">
                                 {this.createSharedList()}
                             </div>
-                            <div className="col-sm-9">
-                                <div>
-                                    <h2 className="header category">My Files</h2>
-                                    <ul className="list-group">
-                                        {
-                                            this.props.files.files.map(file => (
-                                            <li className="list-group-item" key={file.filename}>
-                                                <span className="ion-document-text"></span>
-                                                <span className="listContent"   onClick={() => this.handleClick(file)}>{file.filename}</span>
-                                                <div className="btn-group pull-right" role="group" aria-label="Basic example">
-                                                    <button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>
-                                                    <button type="button" className="btn btn-secondary btnshare ion-ios-trash"></button>
 
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
+                            <div className="col-sm-12">
+                                {this.createMyFilesList()}
+                                {/*<div>*/}
+                                    {/*<h2 className="header category">My Files</h2>*/}
+                                    {/*<ul className="list-group">*/}
+                                        {/*{*/}
+                                            {/*this.props.files.files.map(file => (*/}
+                                            {/*<li className="list-group-item" key={file.filename}>*/}
+                                                {/*<span className="ion-document-text col-sm-0.1"></span>*/}
+                                                {/*<span className="listContent col-sm-10"   onClick={() => this.handleClick(file)}>{file.filename}</span>*/}
+                                                {/*<div className="btn-group pull-right col-sm-1" role="group" aria-label="Basic example">*/}
+                                                    {/*<button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>*/}
+                                                    {/*<button type="button" className="btn btn-secondary btnshare ion-ios-trash"></button>*/}
+
+                                                {/*</div>*/}
+                                            {/*</li>*/}
+                                        {/*))}*/}
+                                    {/*</ul>*/}
+                                {/*</div>*/}
                             </div>
 
-                            <div className="col-sm-3 rightBlock">
-                            <RightMenu/>
-                            </div>
+
                         </main>
+                            <div className="col-sm-3 rightBlock">
+                                <RightMenu/>
+                            </div>
                     </div>
                 </div>
             </div>

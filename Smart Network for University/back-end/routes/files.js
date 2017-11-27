@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var mysql = require("./mysql");
@@ -18,7 +19,7 @@ router.post('/getFiles', function (req, res, next) {
 
 	//console.log(parentId);
 
-	getUser = "SELECT * FROM files WHERE uploadedby = '"+reqUserId+"'";
+	getUser = "SELECT * FROM files WHERE uploadedby = '"+reqUserId+"' AND deleteflag = 0";
 
 	console.log("query is :" +getUser);
 	
@@ -61,7 +62,7 @@ router.get('/downloadFile', function (req, res, next) {
 	});
 
 router.post('/getSharedFiles', function (req, res, next) {
-    	var reqUserId = 3;
+    	var reqUserId = 1;
 		//var reqUserId = req.body.userId;
 		var getShared='';
 		var getDepartments = '';
@@ -101,9 +102,6 @@ router.post('/getSharedFiles', function (req, res, next) {
                                             filelist.push(result[i])
                                         }
                                     }
-                                    //console.log(result1[j].CommunityId);
-                                    console.log("======+++++++");
-                                    console.log(JSON.stringify(filelist));
 
                                 }
                                 res.status(201).json({filelist});
@@ -123,7 +121,7 @@ router.post('/setSharing', function (req, res, next) {
 	console.log(departments);
 
 	// getShared = "SELECT * FROM Directory WHERE UserId = '"+reqUserId+"'";
-	var getFile = "SELECT * FROM files WHERE fileid = "+fileId+"";
+	var getFile = "SELECT * FROM files WHERE fileid = "+fileId+" AND deleteflag = 0";
 	
 	console.log("query is :" +getFile);
 	
@@ -156,4 +154,29 @@ router.post('/setSharing', function (req, res, next) {
 	},getFile);
 });
 
+
+router.post('/deleteFile', function (req, res, next) {
+
+    var fileId = req.body.fileid;
+    var reqUserId = 1;
+
+    var deleteFile='';
+
+
+    deleteFile = "UPDATE files SET deleteflag = 1 WHERE  fileid = '"+fileId+"'";
+
+    console.log("query is :" +deleteFile);
+
+    mysql.fetchData(function(err, result){
+        if(err){
+            throw err;
+        }
+        else{
+            // if(result.length>0){
+            console.log('Deleted File');
+            console.log({result});
+            res.status(200).end();
+        }
+    },deleteFile);
+});
 module.exports = router;

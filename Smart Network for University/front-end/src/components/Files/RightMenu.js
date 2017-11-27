@@ -104,7 +104,6 @@ class RightMenu extends Component {
                         </select>
                         <button className = "c-btn c-btn--primary c-btn--full" onClick={()=>this.handleShared()}>Share</button>
                     </div>
-                    {/***Comma separate multiple members    */}
                 </form>
             </div>
             
