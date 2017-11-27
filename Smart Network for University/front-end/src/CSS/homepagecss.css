@@ -25,6 +25,7 @@
     text-align: left;
     padding-left: 30px;
     color: #0070e0;
+    height: 30px;
 }
 .labelprofile{
     text-align: left;
@@ -40,9 +41,9 @@
 }
 .btnshare{
     padding: 0px!important;
-    margin-right: 10px!important;
-    margin-top: -5px;
-    border-radius: 5px!important;
+    /*margin-right: 10px!important;*/
+    /*margin-top: -5px;*/
+    /*border-radius: 5px!important;*/
     background-color: transparent;
     color: black;
 
@@ -53,7 +54,7 @@
 
 }
 .category{
-    margin-top: -125px;
+    /*margin-top: -125px;*/
 }
 
 .ion-ios-folder{
@@ -80,9 +81,10 @@
 }
 
 .listContent{
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
+    /*display: inline-block;*/
+    /*vertical-align: middle;*/
+    /*line-height: normal;*/
+    vertical-align: middle!important;
 }
 
 .uploadBtn{
@@ -192,4 +194,9 @@ height:100%;
 .input-share-with{
     width:70%;
     margin-right: 20px;
+}
+.nofile{
+    width: 100%!important;
+    height: 50px;
+    border: solid;
 }
