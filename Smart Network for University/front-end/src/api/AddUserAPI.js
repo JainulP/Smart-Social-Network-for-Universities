@@ -19,3 +19,20 @@ export const addUser = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+export const addExistingUser = (payload) =>
+    fetch(`${api}/addUser/addExistingUser`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
