@@ -8,11 +8,9 @@ import deleteicon from './../public/delete.svg';
 import {LoadMyRequests, LoadAssignedRequests} from '../actions/requests';
 import {LoadMembers} from '../actions/user';
 import AddUser from './Admin/AddUser';
-import AddExistingUser from './Admin/AddExistingUser';
 import user from '../public/user.svg';
-import Requests from './Requests/Requests';
 
-class AdminHome extends Component {
+class AssignAdmin extends Component {
 
     componentDidMount() {
         var departmentid = this.props.userdetail.departmentid;
@@ -27,23 +25,23 @@ class AdminHome extends Component {
 
     updateDelete(member){
         RemUserAPI.removeUser({member})
-        .then((status) => {
-            if(status == 201){
-                console.log("User Deleted");
-                var departmentid = this.props.userdetail.departmentid;
-                GetMembersAPI
-                    .getMembers({departmentid})
-                    .then((obj) => {
-                        this
-                            .props
-                            .LoadMembers(obj);
-                    });
-            }    
-            else{
-                console.log("Error Occured while updating file.");
-            }   
-        });
-        
+            .then((status) => {
+                if(status == 201){
+                    console.log("User Deleted");
+                    var departmentid = this.props.userdetail.departmentid;
+                    GetMembersAPI
+                        .getMembers({departmentid})
+                        .then((obj) => {
+                            this
+                                .props
+                                .LoadMembers(obj);
+                        });
+                }
+                else{
+                    console.log("Error Occured while updating file.");
+                }
+            });
+
     }
 
     createMemberList() {
@@ -83,39 +81,42 @@ class AdminHome extends Component {
             <div>
                 {/* <Header/> */}
                 <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-                <button
-                    className="navbar-toggler navbar-toggler-right hidden-lg-up"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarsExampleDefault"
-                    aria-controls="navbarsExampleDefault"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <Link className="navbar-brand" to="/AdminHome">Admin</Link>
-                <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul className="navbar-nav mr-auto">
-                </ul>
-                <form className="form-inline mt-2 mt-md-0">
-                        <button id="btnUser" type="button" className="c-btn c-btn--tertiary--2"
-                            onClick = {() => this.props.history.push("/UserInfo")}>
-                            <img type="image/svg+xml" src={user} height="45" alt='logo'/>
-                        </button>
-                    </form>
-                </div>
-            </nav>
+                    <button
+                        className="navbar-toggler navbar-toggler-right hidden-lg-up"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarsExampleDefault"
+                        aria-controls="navbarsExampleDefault"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <Link className="navbar-brand" to="/AdminHome">Admin</Link>
+                    <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+                        <ul className="navbar-nav mr-auto">
+                        </ul>
+                        <form className="form-inline mt-2 mt-md-0">
+                            <button id="btnUser" type="button" className="c-btn c-btn--tertiary--2"
+                                    onClick = {() => this.props.history.push("/UserInfo")}>
+                                <img type="image/svg+xml" src={user} height="45" alt='logo'/>
+                            </button>
+                        </form>
+                    </div>
+                </nav>
                 <div>
                     <div className="row">
                         <div className="col-sm-3 col-md-2">
                             <nav id="navsidebar" className="hidden-xs-down bg-faded sidebar">
                                 <ul className="nav nav-pills flex-column">
                                     <li className="nav-item">
-                                        <Link className="nav-link active" to="/AdminHome">Home
+                                        <Link className="nav-link active" to="/SuperAdminHome">Home
                                             <span className="sr-only">(current)</span>
                                         </Link>
                                     </li>
                                     <br/>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/AssignAdmin'>Assign Admin</Link>
+                                    </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/requests'>Requests</Link>
                                     </li>
@@ -125,34 +126,9 @@ class AdminHome extends Component {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="col-sm-9 col-md-10 pt-3">
-                            <div className="col-md-9">
-                                <h4>Department Members:</h4>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>StudentId</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email ID</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.createMemberList()}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div className="row">
                             <div className="col-md-3">
-                                <AddUser/>
+                                <AddAdmin/>
                             </div>
-                            <div className="col-md-6">
-                                <AddExistingUser/>
-                            </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -170,11 +146,11 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        myRequests: state.myrequests, 
+        myRequests: state.myrequests,
         assignedRequests: state.assignedrequests,
         userdetail: state.userdetail,
         members: state.members
-    }       
+    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminHome);
+export default connect(mapStateToProps, mapDispatchToProps)(Ass);

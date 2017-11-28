@@ -8,10 +8,11 @@ import {LoadMyRequests, LoadAssignedRequests} from '../actions/requests';
 import {LoadMembers} from '../actions/user';
 import {LoadDepartments} from '../actions/files';
 import AddCommunity from './SuperAdmin/AddCommunity';
+//import  AssignAdmin from './SuperAdmin/AssignAdmin';
 import user from '../public/user.svg';
 import * as CommunityAPI from '../api/CommunityAPI';
 
-class MyRequests extends Component {
+class SuperAdminHome extends Component {
 
     componentDidMount() {
         CommunityAPI.getAllCommunties()
@@ -102,6 +103,12 @@ class MyRequests extends Component {
                                     </li>
                                     <br/>
                                     <li className="nav-item">
+                                        <Link className="nav-link" to='/AssignAdmin'>Assign Admin</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/requests'>Requests</Link>
+                                    </li>
+                                    <li className="nav-item">
                                         <Link className="nav-link" to='/'>Logout</Link>
                                     </li>
                                 </ul>
@@ -155,4 +162,4 @@ function mapStateToProps(state) {
     }       
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyRequests);
+export default connect(mapStateToProps, mapDispatchToProps)(SuperAdminHome);

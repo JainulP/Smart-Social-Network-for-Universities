@@ -9,7 +9,7 @@ import {LoadMyRequests, LoadAssignedRequests} from '../../actions/requests';
 class MyRequests extends Component {
 
     componentWillMount() {
-        var userId = "t@gmail.com";
+        var userId = localStorage.EmailId;
         RequestAPI.getRequest({userId})
             .then((obj) => {
                 this.props.LoadMyRequests(obj);

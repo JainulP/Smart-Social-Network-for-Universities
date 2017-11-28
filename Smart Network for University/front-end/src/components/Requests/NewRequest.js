@@ -15,7 +15,7 @@ class NewRequests extends Component {
     };
 
     createRequest = () => {
-        var userId = "t@gmail.com";
+        var userId = localStorage.EmailId;
         RequestAPI
             .createRequest(this.state)
             .then((status) => {
