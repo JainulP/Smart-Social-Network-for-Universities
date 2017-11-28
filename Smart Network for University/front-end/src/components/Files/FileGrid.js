@@ -31,7 +31,7 @@ class FileGrid extends Component {
 
     componentWillMount()
     {
-        var userId = 1;
+        var userId = localStorage.getItem("UserId");
         FilesAPI.getFiles({userId})
             .then((obj) => {
                 this.props.LoadFiles(obj);

@@ -11,13 +11,13 @@ router.get('/', function (req, res, next) {
 
 router.post('/getFiles', function (req, res, next) {
 
-	//console.log(req);
-	 var reqUserId = 1;
-	//var reqUserId = req.body.userId;
+
+	 var reqUserId = req.body.userId;
+
 
 	var getUser='';
 
-	//console.log(parentId);
+
 
 	getUser = "SELECT * FROM files WHERE uploadedby = '"+reqUserId+"' AND deleteflag = 0";
 
@@ -62,14 +62,14 @@ router.get('/downloadFile', function (req, res, next) {
 	});
 
 router.post('/getSharedFiles', function (req, res, next) {
-    	var reqUserId = 1;
-		//var reqUserId = req.body.userId;
+    	//var reqUserId = 3;
+		var reqUserId = req.body.userId;
 		var getShared='';
 		var getDepartments = '';
     var filelist = [];
 
     getDepartments = "SELECT departmentid FROM user_dep_mapping WHERE userid = '"+reqUserId+"'";
-    getShared = "SELECT * FROM files WHERE departments IS NOT NULL AND uploadedby != "+ reqUserId;
+    getShared = "SELECT * FROM files WHERE departments IS NOT NULL AND uploadedby != "+ reqUserId +" AND deleteflag = 0 ";
 
     console.log("getDepartments",getDepartments);
     console.log("getShared",getShared);
@@ -96,7 +96,7 @@ router.post('/getSharedFiles', function (req, res, next) {
 
                                         var arrDepartments = departments.split(",");
 
-                                         console.log("arrDepartments" + JSON.stringify(arrDepartments));
+                                       //  console.log("arrDepartments" + JSON.stringify(arrDepartments));
                                         // console.log("position"  +commId+ " is " + arrMembers.indexOf(commId.toString()));
                                         if (arrDepartments.indexOf(deptId.toString()) >= 0  && result[i].userid != reqUserId) {
                                             filelist.push(result[i])
@@ -158,7 +158,7 @@ router.post('/setSharing', function (req, res, next) {
 router.post('/deleteFile', function (req, res, next) {
 
     var fileId = req.body.fileid;
-    var reqUserId = 1;
+    //var reqUserId = 1;
 
     var deleteFile='';
 

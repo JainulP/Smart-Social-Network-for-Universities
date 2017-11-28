@@ -46,10 +46,12 @@ class Login extends Component {
                         if (typeof(Storage) !== "undefined") {
                             localStorage.UserId = obj.userid;
                             localStorage.EmailId = obj.emailid;
+                            localStorage.DepartmentId = obj.departmentid;
                             if(userType == 0)
                                 this.props.history.push("/App");
-                            else if(userType == 1)
+                            else if(userType == 1) {
                                 this.props.history.push("/AdminHome");
+                            }
                             else if(userType == 2)
                                 this.props.history.push("/SuperAdminHome");
                         }
@@ -70,6 +72,8 @@ class Login extends Component {
                     exact
                     path="/"
                     render={() => (
+
+
                     <div className="row justify-content-md-center">
                         <div className="col-md-3">
                             <form>
@@ -133,7 +137,7 @@ class Login extends Component {
                                     </button>
                                 </div>
                             </form>
-                            {/* <p>Don't have an account yet? 
+                            {/* <p>Don't have an account yet?
 	                	        <a href="Signup">Sign Up</a>
 	                        </p> */}
                         </div>
