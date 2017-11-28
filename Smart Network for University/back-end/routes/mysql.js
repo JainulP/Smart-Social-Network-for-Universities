@@ -40,10 +40,10 @@ var mysql = require('mysql');
 
 function getConnection(){
 	var pool = mysql.createPool({
-		host : 'localhost',
+		host : 'mysql-instance.cy19i3rbbngt.us-west-1.rds.amazonaws.com',
 		user : 'root',
-		password : 'root',
-		database : 'db_ssn',
+		password : 'mysqlroot',
+		database : 'dbssn',
 		port : '3306',
 		connectionLimit : 600
 	});

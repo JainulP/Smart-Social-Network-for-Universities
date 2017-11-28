@@ -57,8 +57,8 @@ router.post('/createRequest', function (req, res, next) {
 
 	router.post('/getAssignedToMe', function (req, res, next) {
 		
-			var reqUserId = req.body.userId;
-			var reqUserEmail = "t@gmail.com";
+			var reqUserEmail = req.body.userId;
+			// var reqUserEmail = "t@gmail.com";
 			var getRequest = "SELECT * FROM requests WHERE assignedto = '"+reqUserEmail+"' AND deleteflag=0 AND status != 'resolved'";
 			console.log("query is :" +getRequest);
 			

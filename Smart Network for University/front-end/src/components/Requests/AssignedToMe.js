@@ -9,7 +9,7 @@ import * as RequestAPI from '../../api/RequestAPI';
 class AssignedToMe extends Component {
 
     componentDidMount() {
-        var userId = 1;
+        var userId = localStorage.EmailId;
         RequestAPI.getAssignedToMe({userId})
             .then((obj) => {
                 this.props.LoadAssignedRequests(obj);

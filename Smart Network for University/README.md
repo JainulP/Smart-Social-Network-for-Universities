@@ -14,5 +14,5 @@ Execute below commands in your front-end directory
 Steps to import database:
 
 
-mysql -u root -p db_dropbox < dbschema.sql
+mysql -u root -p < dbsql.sql
 
