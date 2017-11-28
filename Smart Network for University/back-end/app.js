@@ -16,7 +16,7 @@ var remCommunity =require('./routes/SuperAdmin/remCommunity');
 var remAdmin =require('./routes/SuperAdmin/remAdmin');
 var adminLogin = require('./routes/Admin/adminLogin');
 var addUser =require('./routes/Admin/addUser');
-var remUser =require('./routes/SuperAdmin/remUser');
+var remUser =require('./routes/Admin/remUser');
 var listUsers =require('./routes/Admin/listUsers');
 
 

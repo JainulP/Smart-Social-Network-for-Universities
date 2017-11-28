@@ -53,7 +53,7 @@ class MyRequests extends Component {
                 .map((memberItem) => {
                     return (
                         <tr>
-                            <td width="30">
+                            <td>
                                 {memberItem.userid}
                             </td>
                             <td>
@@ -61,6 +61,9 @@ class MyRequests extends Component {
                             </td>
                             <td>
                                 {memberItem.lastname}
+                            </td>
+                            <td>
+                                {memberItem.emailid}
                             </td>
                             <td width="30">
                                 <button className="c-btn c-btn--tertiary--2">
@@ -112,13 +115,16 @@ class MyRequests extends Component {
                                     </li>
                                     <br/>
                                     <li className="nav-item">
+                                        <Link className="nav-link" to='/requests'>Requests</Link>
+                                    </li>
+                                    <li className="nav-item">
                                         <Link className="nav-link" to='/'>Logout</Link>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
                         <div className="col-sm-9 col-md-10 pt-3">
-                            <div className="col-md-6">
+                            <div className="col-md-9">
                                 <h4>Department Members:</h4>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -127,7 +133,7 @@ class MyRequests extends Component {
                                                 <th>StudentId</th>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
-                                                <th> </th>
+                                                <th>Email ID</th>
                                             </tr>
                                         </thead>
                                         <tbody>

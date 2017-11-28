@@ -10,17 +10,31 @@ router.post('/addUser', function (req, res, next) {
     var reqPassword = req.body.password;
     var reqDepartment = req.body.departmentid;
 
-    var addUser = "INSERT INTO user(firstname, lastname, emailid, password, departmentid, type, deleteflag) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"','"+reqDepartment+"',0,0)";
+    var addUser = "INSERT INTO user(firstname, lastname, emailid, password, departmentid, type) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"',1,0)";
 
     mysql.fetchData(function(err, result){
         if(err){
             throw err;
         }
         else{
+            /*var newid="SELECT MAX(userid) FROM user";*/
+            var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+result.insertId+"',8)";
+            mysql.fetchData(function(err, result){
+                if(err){
+                    throw err;
+                }
+                else{
+                    console.log('Valid Add');
+                    res.status(201).json({message: "Addition successful"});
+                }
+            },userDepMap);
             console.log('Valid Add');
-            res.status(201).json({message: "Addition successful"});
+           // res.status(201).json({message: "Addition successful"});
         }
     },addUser);
+
+
+
 });
 
 module.exports = router;
