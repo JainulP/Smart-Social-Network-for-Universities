@@ -98,29 +98,32 @@ class FileGrid extends Component {
         if(this.props.shared.sharedfiles && this.props.shared.sharedfiles.length == 0)
         {
             return(
-                <div>
-                <h2 className="header category">Shared with me</h2>
-                    <div className="c-banner">
+
+                <tr>
+
+                    <td>
                         Nothing has been shared with you for now.
-                    </div>
-                </div>
+                    </td>
+                    <td></td>
+                </tr>
+
                 );
             }
         else{
-                return(
-                    <div>
-                        <h2 className="header category">Shared with me</h2>
-                        <ul className="list-group">
-                            {
-                                this.props.shared.sharedfiles.map(file => (
-                                    <li className="list-group-item" key={file.filename}>
-                                        <span className="ion-document-text"></span>
-                                        <span className="listContent"   onClick={() => this.handleClick(file)}>{file.filename}</span>
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
+            if (this.props.shared.sharedfiles) {
+                return this.props.shared.sharedfiles.map((file) => {
+                    return (
+                        <tr>
+                            <td width="30">
+                                <span className="ion-document-text col-sm-0.1"></span>
+                            </td>
+                            <td className="listContent">
+                                <span   onClick={() => this.handleClick(file)}>{file.filename}</span>
+                            </td>
+                        </tr>
                     );
+                });
+            }
             }
     }
 
@@ -129,36 +132,42 @@ class FileGrid extends Component {
         if(this.props.files.files && this.props.files.files.length == 0)
         {
             return(
-                <div>
-                    <h2 className="header category">My Files</h2>
-                    <div className="c-banner">
-                        Nothing has been uploaded by you.
-                    </div>
-                </div>
+                <tr>
+
+                    <td>
+                        Nothing has been shared with you for now.
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             );
         }
         else{
-            return(
-                <div>
-                    <h2 className="header category">My Files</h2>
-                    <ul className="list-group">
-                        {
-                            this.props.files.files.map(file => (
-                                <li className="list-group-item" key={file.filename}>
-                                    <span className="ion-document-text col-sm-0.1"></span>
-                                    <span className="listContent col-sm-10"   onClick={() => this.handleClick(file)}>{file.filename}</span>
-                                    <div className="btn-group pull-right col-sm-1" role="group" aria-label="Basic example">
-                                        <button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>
-                                        <button type="button" className="btn btn-secondary btnshare ion-ios-trash" onClick = {() => this.handleDelete(file)}></button>
 
-                                    </div>
-                                </li>
-                            ))}
-                    </ul>
-                </div>
-            );
+            if (this.props.files.files) {
+                return this.props.files.files.map((file) => {
+                        return (
+                            <tr>
+                                <td width="30">
+                                    <span className="ion-document-text"></span>
+                                </td>
+                                <td className="listContent" >
+                                    <span   onClick={() => this.handleClick(file)}>{file.filename}</span>
+                                </td>
+                                <td width="20">
+                                    <button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>
+                                </td>
+                                <td width="20">
+                                    <button type="button" className="btn btn-secondary btnshare ion-ios-trash" onClick = {() => this.handleDelete(file)}></button>
+                                </td>
+                            </tr>
+                        );
+                    });
+            }
         }
     }
+
 
 
     render() {
@@ -173,35 +182,50 @@ class FileGrid extends Component {
                                 <SideNavBar/>
                             </div>
                             {/*<div className="row col-sm-9 col-md-10 pt-3">*/}
-                        <main role="main" className="row col-sm-7 col-md-7 pt-3">
-                            <h1 className="header col-sm-12">Files</h1>
+                        <div className="row col-sm-7 col-md-7 pt-3">
+                            <h4 className="header col-sm-12">Files</h4>
+
                             <div className="col-sm-12">
-                                {this.createSharedList()}
+                                <h4 className="header">Shared with me</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th> </th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {this.createSharedList()}
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
 
                             <div className="col-sm-12">
+
+
+                                <h4 className="header">My Files</h4>
+                                <div class="table-responsive">
+                                <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                <th> </th>
+                                <th></th>
+                                <th> </th>
+                                <th> </th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 {this.createMyFilesList()}
-                                {/*<div>*/}
-                                    {/*<h2 className="header category">My Files</h2>*/}
-                                    {/*<ul className="list-group">*/}
-                                        {/*{*/}
-                                            {/*this.props.files.files.map(file => (*/}
-                                            {/*<li className="list-group-item" key={file.filename}>*/}
-                                                {/*<span className="ion-document-text col-sm-0.1"></span>*/}
-                                                {/*<span className="listContent col-sm-10"   onClick={() => this.handleClick(file)}>{file.filename}</span>*/}
-                                                {/*<div className="btn-group pull-right col-sm-1" role="group" aria-label="Basic example">*/}
-                                                    {/*<button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>*/}
-                                                    {/*<button type="button" className="btn btn-secondary btnshare ion-ios-trash"></button>*/}
-
-                                                {/*</div>*/}
-                                            {/*</li>*/}
-                                        {/*))}*/}
-                                    {/*</ul>*/}
-                                {/*</div>*/}
+                                </tbody>
+                                </table>
+                                </div>
                             </div>
 
 
-                        </main>
+                        </div>
                             <div className="col-sm-3 rightBlock">
                                 <RightMenu/>
                             </div>
@@ -215,7 +239,7 @@ class FileGrid extends Component {
 
 
         );
-    }  
+    }
 }
 
 function mapStateToProps(state){
@@ -232,3 +256,18 @@ function mapDispatchToProps(dispatch){
   }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FileGrid));
+
+{/*<ul className="list-group">*/}
+{/*{*/}
+{/*this.props.files.files.map(file => (*/}
+{/*<li className="list-group-item" key={file.filename}>*/}
+{/*<span className="ion-document-text col-sm-0.1"></span>*/}
+{/*<span className="listContent col-sm-10"   onClick={() => this.handleClick(file)}>{file.filename}</span>*/}
+{/*<div className="btn-group pull-right col-sm-1" role="group" aria-label="Basic example">*/}
+{/*<button type="button" className="btn btn-secondary btnshare ion-share" onClick={() => this.openShare(file)}></button>*/}
+{/*<button type="button" className="btn btn-secondary btnshare ion-ios-trash" onClick = {() => this.handleDelete(file)}></button>*/}
+
+{/*</div>*/}
+{/*</li>*/}
+{/*))}*/}
+{/*</ul>*/}
