@@ -10,7 +10,7 @@ router.post('/addUser', function (req, res, next) {
     var reqPassword = req.body.password;
     var reqDepartment = req.body.departmentid;
 
-    var addUser = "INSERT INTO user(firstname, lastname, emailid, password, departmentid, type) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"',1,0)";
+    var addUser = "INSERT INTO user(firstname, lastname, emailid, password, departmentid, type) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"','"+reqDepartment +"',0)";
 
     mysql.fetchData(function(err, result){
         if(err){
@@ -52,7 +52,7 @@ router.post('/addExistingUser', function (req, res, next) {
         else{
             if(result.length>0)
             {
-                var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+studentId+"',2)";
+                var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+studentId+"',"+ reqDepartment+")";
                 mysql.fetchData(function(err, result){
                     if(err){
                         throw err;
