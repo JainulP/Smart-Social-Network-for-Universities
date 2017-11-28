@@ -8,6 +8,7 @@ import deleteicon from './../public/delete.svg';
 import {LoadMyRequests, LoadAssignedRequests} from '../actions/requests';
 import {LoadMembers} from '../actions/user';
 import AddUser from './Admin/AddUser';
+import AddExistingUser from './Admin/AddExistingUser';
 import user from '../public/user.svg';
 
 class MyRequests extends Component {
@@ -142,8 +143,13 @@ class MyRequests extends Component {
                                     </table>
                                 </div>
                             </div>
+                            <div className="row">
                             <div className="col-md-3">
                                 <AddUser/>
+                            </div>
+                            <div className="col-md-6">
+                                <AddExistingUser/>
+                            </div>
                             </div>
                         </div>
                     </div>

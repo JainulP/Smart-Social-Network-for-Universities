@@ -18,7 +18,7 @@ router.post('/addUser', function (req, res, next) {
         }
         else{
             /*var newid="SELECT MAX(userid) FROM user";*/
-            var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+result.insertId+"',8)";
+            var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+result.insertId+"',1)";
             mysql.fetchData(function(err, result){
                 if(err){
                     throw err;
@@ -32,6 +32,48 @@ router.post('/addUser', function (req, res, next) {
            // res.status(201).json({message: "Addition successful"});
         }
     },addUser);
+
+
+
+});
+
+
+router.post('/addExistingUser', function (req, res, next) {
+
+    var studentId =  req.body.studentid;
+    var reqDepartment = req.body.departmentid;
+
+    var checkUser = "Select userid from user where userid = '"+ studentId + "' and type = 0 and deleteflag =0";
+    console.log("checkUser",checkUser);
+    mysql.fetchData(function(err, result){
+        if(err){
+            throw err;
+        }
+        else{
+            if(result.length>0)
+            {
+                var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+studentId+"',2)";
+                mysql.fetchData(function(err, result){
+                    if(err){
+                        throw err;
+                    }
+                    else{
+
+                        console.log('Valid Add');
+                        res.status(201).json({message: "mapping successful"});
+                    }
+                },userDepMap);
+            }
+            else
+            {
+                res.status(401).json({message: "Invalid student id"});
+            }
+
+
+        }
+    },checkUser);
+
+
 
 
 
