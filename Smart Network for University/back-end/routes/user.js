@@ -64,7 +64,7 @@ router.post('/updateUser', function (req, res, next) {
 router.post('/getMembers', function (req, res, next) {
         var reqDepId = req.body.departmentid;
     
-        var getUser = "SELECT * FROM user WHERE departmentid = '"+reqDepId+"' and deleteflag=0";
+        var getUser = "SELECT * FROM user WHERE departmentid = '"+reqDepId+"' and deleteflag=0 and type!=2";
         console.log("query is :" +getUser);
         
         mysql.fetchData(function(err, result){
