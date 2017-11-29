@@ -97,7 +97,7 @@ class SuperAdminHome extends Component {
                             <nav id="navsidebar" className="hidden-xs-down bg-faded sidebar">
                                 <ul className="nav nav-pills flex-column">
                                     <li className="nav-item">
-                                        <Link className="nav-link active" to="/AdminHome">Home
+                                        <Link className="nav-link active" to="/SuperAdminHome">Home
                                             <span className="sr-only">(current)</span>
                                         </Link>
                                     </li>
@@ -106,7 +106,7 @@ class SuperAdminHome extends Component {
                                         <Link className="nav-link" to='/AssignAdmin'>Assign Admin</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to='/requests'>Requests</Link>
+                                        <Link className="nav-link" to='/assignedtome'>Requests</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/'>Logout</Link>
