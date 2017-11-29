@@ -15,7 +15,7 @@ class RightMenu extends Component {
 
     componentWillMount()
     {
-        var userId = 1;
+        var userId = localStorage.getItem("UserId");
         CommunityAPI.getCommunties({userId})
             .then((obj) => {
                 this.props.LoadUserDepartments(obj);
