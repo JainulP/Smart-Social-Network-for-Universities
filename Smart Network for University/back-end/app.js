@@ -18,6 +18,7 @@ var adminLogin = require('./routes/Admin/adminLogin');
 var addUser =require('./routes/Admin/addUser');
 var remUser =require('./routes/Admin/remUser');
 var listUsers =require('./routes/Admin/listUsers');
+var addAdmin = require('./routes/SuperAdmin/addAdmin');
 
 
 var request = require('./routes/request');
@@ -58,6 +59,7 @@ app.use('/adminLogin',adminLogin);
 app.use('/addUser',addUser);
 app.use('/remUser',remUser);
 app.use('/listUsers',listUsers);
+app.use('/addAdmin', addAdmin);
 
 
 

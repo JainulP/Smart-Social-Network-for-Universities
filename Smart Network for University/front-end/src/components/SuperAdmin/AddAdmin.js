@@ -6,8 +6,9 @@ import * as AddUserAPI from '../../api/AddUserAPI';
 import {bindActionCreators} from 'redux';
 import {LoadMembers} from '../../actions/user';
 import * as GetMembersAPI from '../../api/getmembersAPI';
+import * as SuperAdminAPI from '../../api/SuperAdminAPI';
 
-class AddUser extends Component {
+class AddAdmin extends Component {
 
     state = {
         userdata: {
@@ -20,20 +21,18 @@ class AddUser extends Component {
         isAdded: ''
     };
 
-    handleAddUser = () => {
-        AddUserAPI
-            .addUser(this.state.userdata)
+    handleAddAdmin = () => {
+        SuperAdminAPI.AddAdmin(this.state.userdata)
             .then((status) => {
                 if (status === 201) {
+                    alert("Success adding the admin!");
                     this.setState({isAdded: true});
-                    var departmentid = this.props.userdetail.departmentid;
-                    GetMembersAPI
-                        .getMembers({departmentid})
-                        .then((obj) => {
-                            this
-                                .props
-                                .LoadMembers(obj);
-                        });
+                    // var departmentid = this.props.userdetail.departmentid;
+                    // GetMembersAPI
+                    //     .getMembers({departmentid})
+                    //     .then((obj) => {
+                    //         this.props.LoadMembers(obj);
+                    //     });
                 } else if (status === 401) {
                     this.setState({isAdded: false});
                 }
@@ -46,15 +45,14 @@ class AddUser extends Component {
 
                 <form>
                     <div className="form-group">
-                        <h4>Add Member</h4>
+                        <h4>Add Admin</h4>
                     </div>
                     <div className="form-group">
                         <input
                             className="form-control"
                             type="text"
                             label="firstname"
-                            placeholder="First Name"
-                            value={this.state.userdata.firstname}
+                            placeholder="First name"
                             onChange={(event) => {
                                 this.setState({
                                     userdata: {
@@ -68,9 +66,8 @@ class AddUser extends Component {
                         <input
                             className="form-control"
                             type="text"
-                            label="lastname"
-                            placeholder="Last Name"
-                            value={this.state.userdata.lastname}
+                            label="last name"
+                            placeholder="Last name"
                             onChange={(event) => {
                                 this.setState({
                                     userdata: {
@@ -132,7 +129,7 @@ class AddUser extends Component {
                         <button
                             className="btn btn-primary"
                             type="button"
-                            onClick={() => this.handleAddUser()}>
+                            onClick={() => this.handleAddAdmin()}>
                             Add
                         </button>
                     </div>
@@ -156,4 +153,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUser);
+export default connect(mapStateToProps, mapDispatchToProps)(AddAdmin);

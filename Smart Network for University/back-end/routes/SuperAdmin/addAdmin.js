@@ -10,7 +10,9 @@ router.post('/addAdmin', function (req, res, next) {
     var reqPassword = req.body.password;
     var reqDepartment = req.body.departmentid;
 
-    var addUser = "Update user SET type=2 WHERE emailid='"+reqEmail+"' and departmentid='"+reqDepartment+"'"
+    var addAdmin =  "INSERT INTO user(firstname, lastname, emailid, password, departmentid, type) Values ('"+reqFirstname+"','"+reqLastname+"','"+reqEmail+"','"+reqPassword+"','"+reqDepartment +"',1)";
+
+    /*var addUser = "Update user SET type=1 WHERE emailid='"+reqEmail+"' and departmentid='"+reqDepartment+"'"*/
     mysql.fetchData(function(err, result){
         if(err){
             throw err;
@@ -19,7 +21,7 @@ router.post('/addAdmin', function (req, res, next) {
             console.log('Valid Add');
             res.status(201).json({message: "Addition successful"});
         }
-    },addUser);
+    },addAdmin);
 
 
 

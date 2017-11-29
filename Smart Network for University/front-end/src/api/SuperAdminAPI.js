@@ -18,3 +18,18 @@ export const superAd = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const AddAdmin = (payload) =>
+    fetch(`${api}/addAdmin/addAdmin`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });

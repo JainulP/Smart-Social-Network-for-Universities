@@ -8,7 +8,7 @@ import {LoadMyRequests, LoadAssignedRequests} from '../actions/requests';
 import {LoadMembers} from '../actions/user';
 import {LoadDepartments} from '../actions/files';
 import AddCommunity from './SuperAdmin/AddCommunity';
-//import  AssignAdmin from './SuperAdmin/AssignAdmin';
+import  AddAdmin from './SuperAdmin/AddAdmin';
 import user from '../public/user.svg';
 import * as CommunityAPI from '../api/CommunityAPI';
 
@@ -132,8 +132,13 @@ class SuperAdminHome extends Component {
                                     </table>
                                 </div>
                             </div>
+                            <div className="row">
                             <div className="col-md-3">
                                 <AddCommunity/>
+                            </div>
+                                <div className="col-md-3">
+                                    <AddAdmin/>
+                                </div>
                             </div>
                         </div>
                     </div>
