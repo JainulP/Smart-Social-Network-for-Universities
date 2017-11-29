@@ -15,9 +15,10 @@ class NewRequests extends Component {
     };
 
     createRequest = () => {
+        var payload = this.state;
         var userId = localStorage.EmailId;
         RequestAPI
-            .createRequest(this.state)
+            .createRequest({payload, userId})
             .then((status) => {
                 if (status === 200) {
                     console.log("Request Created!");

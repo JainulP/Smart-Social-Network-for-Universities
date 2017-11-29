@@ -10,6 +10,7 @@ import * as UserAPI from '../api/GetUserAPI';
 import Requests from './Requests/Requests';
 import Messages from './Messages/Message';
 import AdminHome from './AdminHome';
+import AdminRequests from './Admin/AdminRequests';
 import SuperAdminHome from './SuperAdminHome';
 
 class Login extends Component {
@@ -149,6 +150,7 @@ class Login extends Component {
                 <Route exact path="/requests" render={() => (<Requests/>)}/>
                 <Route exact path="/Messages" render={() => (<Messages/>)}/>
                 <Route exact path="/AdminHome" render={() => (<AdminHome/>)}/>
+                <Route exact path="/Adminrequests" render={() => (<AdminRequests/>)}/>
                 <Route exact path="/SuperAdminHome" render={() => (<SuperAdminHome/>)}/>
             </div>
         );

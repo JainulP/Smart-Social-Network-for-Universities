@@ -117,7 +117,7 @@ class AdminHome extends Component {
                                     </li>
                                     <br/>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to='/requests'>Requests</Link>
+                                        <Link className="nav-link" to='/Adminrequests'>Requests</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/'>Logout</Link>

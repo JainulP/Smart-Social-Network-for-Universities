@@ -29,12 +29,12 @@ router.post('/getRequest', function (req, res, next) {
 
 router.post('/createRequest', function (req, res, next) {
 	
-		var reqsubject = req.body.subject;
-		var reqdescription = req.body.description;
-		var reqassignedTo = req.body.assignedTo;
-		var reqdepartment = req.body.department;
+		var reqsubject = req.body.payload.subject;
+		var reqdescription = req.body.payload.description;
+		var reqassignedTo = req.body.payload.assignedTo;
+		var reqdepartment = req.body.payload.department;
 		var generatedDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-		var reqcreatedby = "t@gmail.com";
+		var reqcreatedby = req.body.userId;
 
 		var createRequest = "INSERT INTO requests(description, assignedto, subject, createdby, departmentid, generated_date, resolved_date) Values ('"+reqdescription+"','"+reqassignedTo+"','"+reqsubject+"','"+reqcreatedby+"','"+reqdepartment+"', '"+generatedDate+"', '"+generatedDate+"')";
 		console.log("query is :" +createRequest);
