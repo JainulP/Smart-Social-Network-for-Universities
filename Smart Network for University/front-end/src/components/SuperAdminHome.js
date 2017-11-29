@@ -79,7 +79,7 @@ class SuperAdminHome extends Component {
                     aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <Link className="navbar-brand" to="/AdminHome">Super Admin</Link>
+                <Link className="navbar-brand" to="/SuperAdminHome">Super Admin</Link>
                 <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul className="navbar-nav mr-auto">
                 </ul>
@@ -97,16 +97,13 @@ class SuperAdminHome extends Component {
                             <nav id="navsidebar" className="hidden-xs-down bg-faded sidebar">
                                 <ul className="nav nav-pills flex-column">
                                     <li className="nav-item">
-                                        <Link className="nav-link active" to="/AdminHome">Home
+                                        <Link className="nav-link active" to="/SuperAdminHome">Home
                                             <span className="sr-only">(current)</span>
                                         </Link>
                                     </li>
                                     <br/>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to='/AssignAdmin'>Assign Admin</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to='/requests'>Requests</Link>
+                                        <Link className="nav-link" to='/SuperAdminrequests'>Requests</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/'>Logout</Link>

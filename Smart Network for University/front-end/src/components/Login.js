@@ -11,6 +11,7 @@ import Requests from './Requests/Requests';
 import Messages from './Messages/Message';
 import AdminHome from './AdminHome';
 import AdminRequests from './Admin/AdminRequests';
+import SuperAdminRequests from './SuperAdmin/SuperAdminRequests';
 import SuperAdminHome from './SuperAdminHome';
 
 class Login extends Component {
@@ -151,6 +152,7 @@ class Login extends Component {
                 <Route exact path="/Messages" render={() => (<Messages/>)}/>
                 <Route exact path="/AdminHome" render={() => (<AdminHome/>)}/>
                 <Route exact path="/Adminrequests" render={() => (<AdminRequests/>)}/>
+                <Route exact path="/SuperAdminrequests" render={() => (<SuperAdminRequests/>)}/>
                 <Route exact path="/SuperAdminHome" render={() => (<SuperAdminHome/>)}/>
             </div>
         );

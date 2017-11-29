@@ -85,4 +85,28 @@ router.post('/getMembers', function (req, res, next) {
         },getUser);
     });
 
+
+router.post('/getAdmin', function (req, res, next) {
+
+    var getUser = "SELECT * FROM user WHERE deleteflag=0 and type=1";
+    console.log("query is :" +getUser);
+
+    mysql.fetchData(function(err, result){
+        if(err){
+            throw err;
+        }
+        else{
+            if(result.length>0){
+                console.log('Members fetched');
+                res.status(201).json({result});
+            }
+            else
+            {
+                console.log("Invalid User");
+                res.status(401).json({message: "Member fetch failed"});
+            }
+        }
+    },getUser);
+});
+
 module.exports = router;

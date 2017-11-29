@@ -3,7 +3,7 @@ import {Route, Link, Switch} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as RemUserAPI from '../api/RemUserAPI';
-import * as GetMembersAPI from '../api/getmembersAPI';
+import * as GetAdminAPI from '../api/getAdminAPI';
 import deleteicon from './../public/delete.svg';
 import {LoadMyRequests, LoadAssignedRequests} from '../actions/requests';
 import {LoadMembers} from '../actions/user';
@@ -14,8 +14,8 @@ class AssignAdmin extends Component {
 
     componentDidMount() {
         var departmentid = this.props.userdetail.departmentid;
-        GetMembersAPI
-            .getMembers({departmentid})
+        GetAdminAPI
+            .getAdmin()
             .then((obj) => {
                 this
                     .props
@@ -27,7 +27,7 @@ class AssignAdmin extends Component {
         RemUserAPI.removeUser({member})
             .then((status) => {
                 if(status == 201){
-                    console.log("User Deleted");
+                    console.log("Admin Deleted");
                     var departmentid = this.props.userdetail.departmentid;
                     GetMembersAPI
                         .getMembers({departmentid})
@@ -38,7 +38,7 @@ class AssignAdmin extends Component {
                         });
                 }
                 else{
-                    console.log("Error Occured while updating file.");
+                    console.log("Error Occured while Deleting Admin.");
                 }
             });
 
@@ -64,6 +64,9 @@ class AssignAdmin extends Component {
                             </td>
                             <td>
                                 {memberItem.emailid}
+                            </td>
+                            <td>
+                                {memberItem.departmentid}
                             </td>
                             <td width="30">
                                 <button className="c-btn c-btn--tertiary--2">
@@ -118,7 +121,7 @@ class AssignAdmin extends Component {
                                         <Link className="nav-link" to='/AssignAdmin'>Assign Admin</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to='/requests'>Requests</Link>
+                                        <Link className="nav-link" to='/assignedtome'>Requests</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/'>Logout</Link>
@@ -126,10 +129,30 @@ class AssignAdmin extends Component {
                                 </ul>
                             </nav>
                         </div>
+                        <div className="col-sm-9 col-md-10 pt-3">
+                        <div className="col-md-11">
+                            <h4>Deaprtment Admins</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>StudentId</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email ID</th>
+                                        <th>Department ID</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.createMemberList()}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                             <div className="col-md-3">
                                 <AddAdmin/>
                             </div>
-                    </div>
+                        </div>
                 </div>
             </div>
         );
