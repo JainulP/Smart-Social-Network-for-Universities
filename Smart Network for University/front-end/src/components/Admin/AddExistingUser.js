@@ -22,6 +22,7 @@ class AddExistingUser extends Component {
             .addExistingUser(this.state.userdata)
             .then((status) => {
                 if (status === 201) {
+                    alert("Success giving rights to department!");
                     this.setState({isAdded: true});
                     var departmentid = this.props.userdetail.departmentid;
                     GetMembersAPI
@@ -41,7 +42,7 @@ class AddExistingUser extends Component {
 
                 <form>
                     <div className="form-group">
-                        <h4>Add Existing Student to this department</h4>
+                        <h4>Give department access to student with student id</h4>
                     </div>
                     <div className="form-group">
                         <input

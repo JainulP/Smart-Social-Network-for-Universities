@@ -56,6 +56,7 @@ router.post('/addExistingUser', function (req, res, next) {
             if(result.length>0)
             {
                 var userDepMap="INSERT INTO user_dep_mapping(userid,departmentid) Values('"+studentId+"',"+ reqDepartment+")";
+                console.log("userDepMap",userDepMap);
                 mysql.fetchData(function(err, result){
                     if(err){
                         throw err;
