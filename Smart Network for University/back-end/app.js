@@ -25,6 +25,7 @@ var request = require('./routes/request');
 var files = require('./routes/files');
 var uploadFiles = require('./routes/uploadFiles');
 var communities = require('./routes/communities');
+var announcement = require('./routes/announcement');
 
 
 
@@ -67,6 +68,8 @@ app.use('/request', request);
 app.use('/files', files);
 app.use('/uploadFiles',uploadFiles);
 app.use('/communities',communities);
+
+app.use('/announcement', announcement);
 
 
 

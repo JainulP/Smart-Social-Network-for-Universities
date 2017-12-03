@@ -55,6 +55,29 @@ router.post('/createRequest', function (req, res, next) {
 		},createRequest);
 	});
 
+	router.post('/completeRequest', function (req, res, next) {
+		
+			var reqid = req.body.requestItem.requestid;
+	
+			var createRequest = "UPDATE requests SET status = 'RESOLVED' WHERE requestid= '"+reqid+"'";
+			console.log("query is :" +createRequest);
+			
+			mysql.fetchData(function(err, result){
+				if(err){
+					throw err;
+				}
+				else{
+					if(err){
+						throw err;
+					}
+					else{
+						console.log('Request Created');
+						res.status(200).json({message: "Request creation successful"});
+					}
+				}
+			},createRequest);
+		});
+
 	router.post('/getAssignedToMe', function (req, res, next) {
 		
 			var reqUserEmail = req.body.userId;
