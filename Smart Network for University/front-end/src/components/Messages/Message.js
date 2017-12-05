@@ -16,8 +16,8 @@ class Message extends Component {
         super(props);
         this.state ={
             userdata: {
-                userid: 9,
-                userName: 'deepa4',
+                userid: localStorage.UserId,
+                userName: localStorage.firstname,
             },
             chatUsers: [],
             groups: [],

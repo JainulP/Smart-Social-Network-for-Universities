@@ -48,6 +48,7 @@ class Login extends Component {
                         if (typeof(Storage) !== "undefined") {
                             localStorage.UserId = obj.userid;
                             localStorage.EmailId = obj.emailid;
+                            localStorage.firstname = obj.firstname;
                             localStorage.DepartmentId = obj.departmentid;
                             if(userType == 0)
                                 this.props.history.push("/App");

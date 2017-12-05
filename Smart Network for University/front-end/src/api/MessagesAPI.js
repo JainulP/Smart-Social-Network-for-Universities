@@ -81,6 +81,23 @@ export const receiveMessages = (payload) =>
         return error;
     });
 
+
+export const getGroupMessages = (payload) =>
+    fetch(`${api}/messages/getGroupMessages`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log(error);
+        return error;
+    });
+
+
 export const writeMessages = (payload) =>
     fetch(`${api}/messages/writeMessages`, {
         method: 'POST',
@@ -96,3 +113,19 @@ export const writeMessages = (payload) =>
         return error;
     });
 
+
+
+export const writeGroupMessages = (payload) =>
+    fetch(`${api}/messages/writeGroupMessages`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log(error);
+        return error;
+    });

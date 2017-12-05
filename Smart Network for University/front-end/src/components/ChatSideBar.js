@@ -16,12 +16,14 @@ class ChatSideBar extends  Component{
             },
             chatUsers: [],
             groups: [],
+            currentGroup:null,
             toUserId: null,
             messages : [{"message":"Click on a chat to read the messages."}],
            	usersInChat:{
            		 toUser:'',
            		fromUser:''
-           	}
+           	},
+           	isGroup: false
         };
         this.setState({
         	...this.state,
@@ -46,31 +48,29 @@ class ChatSideBar extends  Component{
         	messages: e.target.value
     	});
 	}
+
+
+
+
 	sendMessages(){
-		var details = {
-			fromUser: this.state.userdata.userid,
-			toUser: this.state.toUserId,
-			msg: this.state.messages
+		if(this.state.isGroup){
+			var details = {
+				fromUser: localStorage.firstname,
+				toUser: this.state.currentGroup,
+				msg: this.state.messages
+			}
+			
+			MessagesAPI.writeGroupMessages(details).then((status) => {
+	         });
+		}else {
+			var details = {
+				fromUser: localStorage.firstname,
+				toUser: this.state.toUserId,
+				msg: this.state.messages
+			}
+			 MessagesAPI.writeMessages(details).then((status) => {
+	         });
 		}
-		MessagesAPI.sendMessages(details).then((status) => {
-			console.log("success");
-			MessagesAPI.receiveMessages().then((status) => {
-				console.log(status);
-				var details = {
-					fromUser: this.state.userdata.userid,
-					toUser: this.state.toUserId,
-					msg: this.state.messages
-				}
-				MessagesAPI.getUser(details).then((status)=>{
-						var details = {
-							fromUser: status.result,
-						}
-						// MessagesAPI.writeMessages(details).then((status) => {
-      //       			this.props.LoadMessages(status);
-        			// });
-				})
-			});
-        });
 	}
 
 	addMessagesToUI(){
@@ -79,7 +79,7 @@ class ChatSideBar extends  Component{
 			return this.props.messages.messages.map((mesg) => {
 				return(
 						<div>
-	                        <h5>{mesg.firstname1}</h5>
+	                        <h5> <strong>{mesg.firstname1}</strong></h5>
 	                        <p>{mesg.msg}</p>
 	                    </div>
 					)
@@ -91,17 +91,34 @@ class ChatSideBar extends  Component{
 	}
 
 	loadChatContent = (e) => {
+
 		this.setState({
-			toUserId: e
+			toUserId: e,
+			isGroup: false
 		});
 		var userList = {
-			fromUser: this.state.userdata.userid,
+			fromUser: localStorage.firstname,
 			toUser: e
 		}
         MessagesAPI.getMessages({userList}).then((status) => {
             this.props.LoadMessages(status);
         });
 	}
+
+	loadGroupContent = (e) => {
+		this.setState({
+			currentGroup: e,
+			isGroup: true
+		});
+		var userList = {
+			fromUser: localStorage.firstname,
+			toUser: e
+		}
+        MessagesAPI.getGroupMessages({userList}).then((status) => {
+            this.props.LoadMessages(status);
+        });
+	}
+
 
     render() {
         return (
@@ -110,14 +127,14 @@ class ChatSideBar extends  Component{
 					<div>
 						{
 						 this.state.chatUsers.map(function(users){
-							  return (<div id="users" style={{ borderTop:1, paddingLeft: 40, paddingTop:8, paddingBottom: 8 }}><a id={users.userid} onClick={()=>this.loadChatContent(users.userid)}> {users.firstname} </a></div>)
+							  return (<div id="users" style={{ borderTop:1, paddingLeft: 40, paddingTop:8, paddingBottom: 8 }}><a id={users.userid} onClick={()=>this.loadChatContent(users.firstname)}> {users.firstname} </a></div>)
 						 }, this)
 						}
 					</div>
 					<div>
 						{
 						 this.state.groups.map(function(group){
-							  return (<div id="users" style={{ borderTop:1, paddingLeft: 40, paddingTop:8, paddingBottom: 8 }}><a id={group.departmentid} onClick={()=>this.loadChatContent(group.departmentid)}> {group.dep_name} </a></div>)
+							  return (<div id="users" style={{ borderTop:1, paddingLeft: 40, paddingTop:8, paddingBottom: 8 }}><a id={group.departmentid} onClick={()=>this.loadChatContent(group.dep_name)}> {group.dep_name} </a></div>)
 						 }, this)
 						}
 					</div>
