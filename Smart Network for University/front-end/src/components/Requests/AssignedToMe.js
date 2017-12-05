@@ -8,11 +8,31 @@ import * as RequestAPI from '../../api/RequestAPI';
 
 class AssignedToMe extends Component {
 
+    state={
+        status:''
+    }
+
     componentDidMount() {
         var userId = localStorage.EmailId;
         RequestAPI.getAssignedToMe({userId})
             .then((obj) => {
                 this.props.LoadAssignedRequests(obj);
+            });
+    }
+
+    completeRequest(requestItem){
+        var userId = localStorage.EmailId;
+        RequestAPI.completeRequest({requestItem})
+            .then((status) => {
+                if (status === 200) {
+                    console.log("Request Complete!");
+                    RequestAPI.getAssignedToMe({userId})
+                    .then((obj) => {
+                        this.props.LoadAssignedRequests(obj);
+                });
+                } else if (status === 400) {
+                    console.log("Unable to Complete request!");
+                }
             });
     }
 
@@ -27,7 +47,7 @@ class AssignedToMe extends Component {
                         <td>
                             {requestItem.description}
                         </td>
-                        <td width = "60">
+                        <td width = "120">
                             {requestItem.status}
                         </td>
                         <td width = "60">
@@ -35,6 +55,14 @@ class AssignedToMe extends Component {
                         </td>
                         <td width = "60">
                             {requestItem.generated_date}
+                        </td>
+                        <td width = "60">
+                        <button
+                            className="btn btn-primary"
+                            type="button"
+                            onClick={() => this.completeRequest(requestItem)}>
+                            Mark Complete
+                            </button>
                         </td>
                     </tr>
             );

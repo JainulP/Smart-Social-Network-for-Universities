@@ -4,38 +4,8 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const createRequest = (payload) =>
-    fetch(`${api}/request/createRequest`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    }).then(res => {
-        return res.status;
-    }).catch(error => {
-        console.log("This is error");
-        return error;
-    });
-
-export const completeRequest = (payload) =>
-    fetch(`${api}/request/completeRequest`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    }).then(res => {
-        return res.status;
-    }).catch(error => {
-        console.log("This is error");
-        return error;
-    });
-
-export const getRequest = (payload) =>
-    fetch(`${api}/request/getRequest`, {
+export const receiveMessages = (payload) =>
+    fetch(`${api}/messages/receiveMessages`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -49,8 +19,8 @@ export const getRequest = (payload) =>
         return error;
     });
 
-export const getAssignedToMe = (payload) =>
-    fetch(`${api}/request/getAssignedToMe`, {
+    export const sendMessages = (payload) =>
+    fetch(`${api}/messages/sendMessages`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -63,3 +33,36 @@ export const getAssignedToMe = (payload) =>
         console.log("This is error");
         return error;
     });
+
+    export const getUsersLists = (payload) =>
+    fetch(`${api}/user/getUsersList`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log(error);
+        return error;
+    });
+
+
+    export const getMessages = (payload) =>
+    fetch(`${api}/messages/getMessages`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log(error);
+        return error;
+    });
+
+

@@ -9,6 +9,8 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_ssn` /*!40100 DEFAULT CHARACTER SET 
  DROP TABLE IF EXISTS `requests`;
  DROP TABLE IF EXISTS `user`;
  DROP TABLE IF EXISTS `department`;
+ DROP TABLE IF EXISTS `chatusers`;
+ 
  
  CREATE TABLE `user` (
    `userid` int(11) NOT NULL AUTO_INCREMENT,
@@ -87,3 +89,15 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_ssn` /*!40100 DEFAULT CHARACTER SET 
    FOREIGN KEY (`userid`) REFERENCES user(`userid`),
    FOREIGN KEY (`reqid`) REFERENCES requests(`requestid`)
  ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+  CREATE TABLE `chatusers` (
+   `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `emailid` varchar(100) NOT NULL,
+  `departmentid` int(11) NOT NULL,
+  `type` int(1) DEFAULT '0' COMMENT '0=User,1=Admin,2=SuperAdmin',
+  `deleteflag` int(1) DEFAULT '0',
+    PRIMARY KEY (`userid`),
+  UNIQUE KEY `emailid_UNIQUE` (`emailid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;

@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Requests from './Requests/Requests';
 import Home from './Home';
+import Announcements from './Announcements';
 import SideNavBar from './SideNavBar';
 import Header from './Header';
 import '../public/style.css'
@@ -22,7 +23,8 @@ class App extends Component {
                         </div>
                         <div className="col-sm-9 col-md-10 pt-3">
                             <h2>Department of Software Engineering</h2>
-                            <h4>Announcements will appear here</h4>
+                            <hr/>
+                            <Announcements/>
                         </div>
                     </div>
                 </div>
