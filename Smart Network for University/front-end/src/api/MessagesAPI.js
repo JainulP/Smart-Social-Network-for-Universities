@@ -49,6 +49,22 @@ export const receiveMessages = (payload) =>
         return error;
     });
 
+     export const getUser = (payload) =>
+    fetch(`${api}/messages/getUser`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log(error);
+        return error;
+    });
+
+
 
     export const getMessages = (payload) =>
     fetch(`${api}/messages/getMessages`, {
@@ -65,4 +81,18 @@ export const receiveMessages = (payload) =>
         return error;
     });
 
+export const writeMessages = (payload) =>
+    fetch(`${api}/messages/writeMessages`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.json();
+    }).catch(error => {
+        console.log(error);
+        return error;
+    });
 

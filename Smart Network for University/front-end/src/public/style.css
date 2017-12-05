@@ -1,3 +1,75 @@
 #navsidebar{
-    height: 100vh;
+    height: 90vh;
   }
+
+/*#chatBarHolder{
+	height: 90%;
+}
+*/
+#chatContainer{
+	height: 90vh;
+	width: 100%;
+}
+
+
+/*chat side bar starts*/
+#chatsidebar{
+	height: 90vh;
+    width: 250vh;
+    border-width: 1px;
+    border-color: rgb(0,0,0);
+    max-width: 30vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: -15px;
+}
+
+#chatsidebar::-webkit-scrollbar {
+    width: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(192,192,192,0.3);
+}
+
+#chatsidebar::-webkit-scrollbar-track {
+    background:  rgba(192,192,192,0.3);
+    border-radius: 12px;
+}
+
+#chatsidebar::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background: rgba(50,50,50,0.3); 
+}
+
+/*chat side bar ends*/
+
+
+#inputMessage{
+	width: 90%;
+    left: 10vh;
+}
+
+
+/*css for chats conatiner starts*/
+#chats {
+	margin-top: -30px;
+    padding-left: 30px;
+    overflow-y: scroll;
+    height: 80vh;
+    width:152vh;
+}
+
+#chats::-webkit-scrollbar {
+    width: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(192,192,192,0.3);
+}
+
+#chats::-webkit-scrollbar-track {
+    background:  rgba(192,192,192,0.3);
+    border-radius: 12px;
+}
+
+#chats::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background: rgba(50,50,50,0.3); 
+}
+
+/*css for chats conatiner ends*/

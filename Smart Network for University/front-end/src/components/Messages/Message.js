@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import App from '../App';
 import Header from '../Header';
-import {ChatSideBar} from '../ChatSideBar';
+import ChatSideBar from '../ChatSideBar';
 import SideNavBar from '../SideNavBar';
 import * as MessagesAPI from '../../api/MessagesAPI';
 import * as CommunityAPI from '../../api/CommunityAPI';

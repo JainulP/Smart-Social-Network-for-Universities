@@ -12,13 +12,6 @@ class ChatContainer extends  Component{
 			messages : this.props.messages
 		});
 	}
-
-	componentWillMount(){
-		MessagesAPI.getMessages().then((status) => {
-			console.log(status);
-		});
-	}
-
 	componentWillReceiveProps(nextProps){
 		this.setState({
 			...this.state,
@@ -45,10 +38,27 @@ class ChatContainer extends  Component{
     	});
 	}
 
+
+	addMessagesToUI(){
+		if(this.state.messages){
+			return
+		         this.state.messages.map((mesg) => {
+		        	 return (mesg.msg)
+				 });
+		    }
+		    else{
+		    	return "no messages so far"
+		    }
+	}
+
 	 render() {
         return (
         	<div>
         		<div id="chats">
+        		Click on user from the list to see the chat
+        			<body>
+	        			{this.addMessagesToUI()}
+        			</body>
         		</div>
         		<div id="inputMessage" className="input-group">
 		      		<input 
