@@ -19,6 +19,7 @@ var addUser =require('./routes/Admin/addUser');
 var remUser =require('./routes/Admin/remUser');
 var listUsers =require('./routes/Admin/listUsers');
 var addAdmin = require('./routes/SuperAdmin/addAdmin');
+var message = require('./routes/messages');
 
 
 var request = require('./routes/request');
@@ -63,12 +64,11 @@ app.use('/listUsers',listUsers);
 app.use('/addAdmin', addAdmin);
 
 
-
 app.use('/request', request);
 app.use('/files', files);
 app.use('/uploadFiles',uploadFiles);
 app.use('/communities',communities);
-
+app.use('/messages', message);
 app.use('/announcement', announcement);
 
 

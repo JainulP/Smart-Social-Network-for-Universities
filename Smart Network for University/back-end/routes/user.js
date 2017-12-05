@@ -109,4 +109,32 @@ router.post('/getAdmin', function (req, res, next) {
     },getUser);
 });
 
+
+router.post('/getUsersList', function (req, res, next) {
+    var reqUsername = req.body.userid;
+    var getUser = "SELECT * FROM user WHERE userid != '"+reqUsername+"' ";
+    console.log("query is :" +getUser);
+    
+    mysql.fetchData(function(err, result){
+        if(err){
+            throw err;
+        }
+        else{
+            if(result.length>0){
+                console.log('Valid Login');
+                res.status(201).json({result});
+            }
+            else
+            {
+                console.log("Invalid Login");
+                res.status(401).json({message: "Login failed"})
+            }
+        }
+    },getUser);
+});
+
+
+
+
+
 module.exports = router;
