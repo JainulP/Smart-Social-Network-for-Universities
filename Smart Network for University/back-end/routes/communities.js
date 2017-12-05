@@ -98,7 +98,7 @@ router.post('/getUserCommunity', function (req, res, next) {
     var departments =[];
     var departmentsID ='';
     console.log("USER ID"+ reqUserId);
-    var getUserCommunity = "SELECT dep_name FROM department JOIN user on user.departmentid =department.departmentid WHERE user.userid = "+reqUserId+"";
+    var getUserCommunity = "SELECT user.departmentid,dep_name FROM department JOIN user on user.departmentid =department.departmentid WHERE user.userid = "+reqUserId+"";
 
     console.log("getUserCommunity" +getUserCommunity);
 
