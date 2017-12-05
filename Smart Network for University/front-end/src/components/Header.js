@@ -31,11 +31,9 @@ class Header extends Component {
                                 <span className="sr-only">(current)</span>
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Profile</a>
-                        </li>
                     </ul>
                     <form className="form-inline mt-2 mt-md-0">
+                        <p style={{color:'white', marginTop:0, paddin:0}}>{localStorage.EmailId}</p>
                         <button id="btnUser" type="button" className="c-btn c-btn--tertiary--2"
                             onClick = {() => this.props.history.push("/UserInfo")}>
                             <img type="image/svg+xml" src={user} height="45" alt='logo'/>
