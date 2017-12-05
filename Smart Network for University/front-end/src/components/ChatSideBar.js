@@ -42,13 +42,23 @@ class ChatSideBar extends  Component{
 		});
 		
 	}
+	componentDidMount(){
+		setInterval( () => { 
+	var userList = {
+		fromUser: localStorage.firstname,
+		toUser: localStorage.tousr
+	}
+	MessagesAPI.getMessages({userList}).then((status) => {
+		this.props.LoadMessages(status);
+	});
+	}, 3000);
+}
 
 	changeHandle(e){
 		this.setState({
         	messages: e.target.value
     	});
 	}
-
 
 	sendMessages(){
 		if(this.state.isGroup){
@@ -89,7 +99,7 @@ class ChatSideBar extends  Component{
 	}
 
 	loadChatContent = (e) => {
-
+		localStorage.tousr = e;
 		this.setState({
 			toUserId: e,
 			isGroup: false
@@ -104,6 +114,7 @@ class ChatSideBar extends  Component{
 	}
 
 	loadGroupContent = (e) => {
+		localStorage.tousr = e;
 		this.setState({
 			currentGroup: e,
 			isGroup: true
