@@ -101,3 +101,11 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_ssn` /*!40100 DEFAULT CHARACTER SET 
     PRIMARY KEY (`userid`),
   UNIQUE KEY `emailid_UNIQUE` (`emailid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group` (
+  `from` varchar(50) NOT NULL,
+  `dep_name` varchar(50) NOT NULL,
+  'message' varchar(100),
+  `date` DATETIME
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
