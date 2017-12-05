@@ -46,6 +46,10 @@ class FileGrid extends Component {
             });
 
     }
+    componentDidMount()
+    {
+
+    }
 
     handleClick(fileitem){
 
@@ -80,7 +84,7 @@ class FileGrid extends Component {
     }
 
     handleDelete(fileitem){
-        var userId = 1;
+        var userId = localStorage.getItem("UserId");
         console.log(fileitem);
         UpdateFilesAPI.deleteFile(fileitem)
             .then((res) =>
@@ -135,7 +139,7 @@ class FileGrid extends Component {
                 <tr>
 
                     <td>
-                        Nothing has been shared with you for now.
+                        Nothing has been Uploaded by you.
                     </td>
                     <td></td>
                     <td></td>

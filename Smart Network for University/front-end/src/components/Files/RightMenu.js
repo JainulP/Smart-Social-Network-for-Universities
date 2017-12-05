@@ -65,7 +65,7 @@ class RightMenu extends Component {
                 //var userDetail = this.props.userdetail;
                 var userId = localStorage.UserId;
                 var parentId = this.props.files.parentId;
-                FilesAPI.getFiles({userId, parentId})
+                FilesAPI.getFiles({userId})
                     .then((obj) => {       
                     this.props.LoadFiles(obj);
                 });
