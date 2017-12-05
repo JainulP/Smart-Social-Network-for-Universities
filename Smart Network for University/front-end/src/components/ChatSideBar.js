@@ -50,8 +50,6 @@ class ChatSideBar extends  Component{
 	}
 
 
-
-
 	sendMessages(){
 		if(this.state.isGroup){
 			var details = {
@@ -134,7 +132,7 @@ class ChatSideBar extends  Component{
 					<div>
 						{
 						 this.state.groups.map(function(group){
-							  return (<div id="users" style={{ borderTop:1, paddingLeft: 40, paddingTop:8, paddingBottom: 8 }}><a id={group.departmentid} onClick={()=>this.loadChatContent(group.dep_name)}> {group.dep_name} </a></div>)
+							  return (<div id="users" style={{ borderTop:1, paddingLeft: 40, paddingTop:8, paddingBottom: 8 }}><a id={group.departmentid} onClick={()=>this.loadGroupContent(group.dep_name)}> {group.dep_name} </a></div>)
 						 }, this)
 						}
 					</div>

@@ -70,8 +70,6 @@ router.post('/getUser', function (req, res, next) {
                     "userid = '" +toUser+ "' OR" 
                     "userid = '" +fromUser+"'" ;
 
-    console.log("getUser")
-    console.log(getUser);
     mysql.fetchData(function(err, result){
         if(err){
             throw err;
@@ -133,14 +131,12 @@ router.post('/writeGroupMessages', function (req, res, next) {
     var msg = req.body.msg;
     var time = Date.now();
 
-    var getUser = "INSERT INTO groups " + 
-         "(from, dep_name, msg, date) " + 
-              "values('"+fromUser+"'," +
+    var getUser = "INSERT INTO dbssn.groups(firstname1, dep_name, msg, date) " + 
+              "values ('"+fromUser+"'," +
               "'"+ toUser+"', " +
-              "values("+ toUser+"', " +
               "'"+ msg +"', " +
               "'"+ time +"')";
-              
+
     mysql.fetchData(function(err, result){
     if(err){
         throw err;
