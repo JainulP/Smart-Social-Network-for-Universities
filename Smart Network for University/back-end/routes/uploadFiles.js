@@ -11,7 +11,7 @@ router.post('/uploadFile', upload.any(), function (req, res, next) {
     
     const file = req.files[0]; 
     const meta = req.body;
-    const reqUserId = 1;
+    const reqUserId = req.body.userId;
     //const reqUserId = req.body.userId;
     //const reqParentId = Number(req.body.parentId);
     const reqFileName = req.body.name;
