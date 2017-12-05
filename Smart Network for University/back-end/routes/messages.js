@@ -173,8 +173,7 @@ router.post('/writeMessages', function (req, res, next) {
 
     var getUser = "INSERT INTO groups " + 
          "(from, dep_name, msg, date) " + 
-              "values('"+fromUser+"'," +
-              "'"+ toUser+"', " +
+              "values("+ toUser+"', " +
               "'"+ msg +"', " +
               "'"+ time +"')";
     mysql.fetchData(function(err, result){
