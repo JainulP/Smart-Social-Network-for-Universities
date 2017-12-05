@@ -7,6 +7,7 @@ import * as FilesAPI from '../../api/GetFilesAPI';
 import * as CommunityAPI from '../../api/CommunityAPI';
 import {LoadFiles} from '../../actions/files';
 import {LoadUserDepartments} from '../../actions/files';
+import {LoadUserOnlyDepartments} from '../../actions/files';
 
 class RightMenu extends Component {
     state = {
@@ -16,9 +17,9 @@ class RightMenu extends Component {
     componentWillMount()
     {
         var userId = localStorage.getItem("UserId");
-        CommunityAPI.getCommunties({userId})
+        CommunityAPI.getUserCommunity({userId})
             .then((obj) => {
-                this.props.LoadUserDepartments(obj);
+                this.props.LoadUserOnlyDepartments(obj);
                 console.log(obj);
             });
 
@@ -64,7 +65,7 @@ class RightMenu extends Component {
                 //var userDetail = this.props.userdetail;
                 var userId = localStorage.UserId;
                 var parentId = this.props.files.parentId;
-                FilesAPI.getFiles({userId, parentId})
+                FilesAPI.getFiles({userId})
                     .then((obj) => {       
                     this.props.LoadFiles(obj);
                 });
@@ -124,7 +125,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({LoadFiles : LoadFiles,LoadUserDepartments:LoadUserDepartments},dispatch);
+    return bindActionCreators({LoadFiles : LoadFiles,LoadUserDepartments:LoadUserDepartments,LoadUserOnlyDepartments:LoadUserOnlyDepartments},dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);

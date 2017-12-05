@@ -21,6 +21,7 @@ class NewRequests extends Component {
             .createRequest({payload, userId})
             .then((status) => {
                 if (status === 200) {
+                    alert("Request created! You can view your requests under My Requests.")
                     console.log("Request Created!");
                     RequestAPI
                     .getRequest({userId})
@@ -63,7 +64,7 @@ class NewRequests extends Component {
                         }}></textarea>
                     </div>
                 </div>
-                <div class="form-group row">
+                {/* <div class="form-group row">
                     <label for="department" class="col-3 col-form-label">Department</label>
                     <div class="col-9">
                         <input
@@ -75,7 +76,7 @@ class NewRequests extends Component {
                             this.setState({department: event.target.value});
                         }}/>
                     </div>
-                </div>
+                </div> */}
                 <div class="form-group row">
                     <label for="assignedTo" class="col-3 col-form-label">Assign To</label>
                     <div class="col-9">

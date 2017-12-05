@@ -11,6 +11,20 @@ import Header from './Header';
 import '../public/style.css'
 
 class App extends Component {
+    renderDepartment(){
+        if(localStorage.DepartmentId == 1){
+            return "Software Engineering";
+        }
+        else if(localStorage.DepartmentId == 5){
+            return "Computer Engineering";
+        }
+        else if(localStorage.DepartmentId == 6){
+            return "Electrical Engineering";
+        }
+        else if(localStorage.DepartmentId == 7){
+            return "Computer Science";
+        }
+    }
 
     render() {
         return (
@@ -22,7 +36,8 @@ class App extends Component {
                             <SideNavBar/>
                         </div>
                         <div className="col-sm-9 col-md-10 pt-3">
-                            <h2>Department of Software Engineering</h2>
+                            
+                            <h2>Department of {this.renderDepartment()}</h2>
                             <hr/>
                             <Announcements/>
                         </div>

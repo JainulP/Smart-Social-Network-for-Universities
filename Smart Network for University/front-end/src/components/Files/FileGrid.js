@@ -15,7 +15,7 @@ import SideNavBar from '../SideNavBar';
 import RightMenu from './RightMenu';
 import '../../CSS/homepagecss.css';
 import '../../CSS/homePage.css';
-import {LoadFiles, LoadShared,LoadUserDepartments} from '../../actions/files';
+import {LoadFiles, LoadShared,LoadUserDepartments,LoadUserOnlyDepartments} from '../../actions/files';
 import Header from '../Header';
 
 class FileGrid extends Component {
@@ -40,10 +40,14 @@ class FileGrid extends Component {
             .then((obj) => {
                 this.props.LoadShared(obj);
             });
-        CommunityAPI.getCommunties({userId})
+        CommunityAPI.getUserCommunity({userId})
             .then((obj) => {
-                this.props.LoadUserDepartments(obj);
+                this.props.LoadUserOnlyDepartments(obj);
             });
+
+    }
+    componentDidMount()
+    {
 
     }
 
@@ -80,7 +84,7 @@ class FileGrid extends Component {
     }
 
     handleDelete(fileitem){
-        var userId = 1;
+        var userId = localStorage.getItem("UserId");
         console.log(fileitem);
         UpdateFilesAPI.deleteFile(fileitem)
             .then((res) =>
@@ -135,7 +139,7 @@ class FileGrid extends Component {
                 <tr>
 
                     <td>
-                        Nothing has been shared with you for now.
+                        Nothing has been Uploaded by you.
                     </td>
                     <td></td>
                     <td></td>
@@ -252,7 +256,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({UpdateShared: UpdateShared,LoadFiles : LoadFiles, LoadShared: LoadShared, LoadUserDepartments:LoadUserDepartments},dispatch);
+    return bindActionCreators({UpdateShared: UpdateShared,LoadFiles : LoadFiles, LoadShared: LoadShared, LoadUserDepartments:LoadUserDepartments, LoadUserOnlyDepartments:LoadUserOnlyDepartments},dispatch);
   }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FileGrid));

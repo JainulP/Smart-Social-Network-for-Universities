@@ -45,7 +45,7 @@ function getConnection(){
 		password : 'mysqlroot',
 		database : 'dbssn',
 		port : '3306',
-		connectionLimit : 600
+		connectionLimit : 6000
 	});
 	return pool;
 }

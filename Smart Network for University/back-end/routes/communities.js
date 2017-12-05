@@ -12,10 +12,10 @@ router.post('/getCommunities', function (req, res, next) {
     var reqUserId = req.body.userId;
     var departments =[];
     var departmentsID ='';
+console.log("USER ID"+ reqUserId);
+    var getCommunity = "SELECT departmentid FROM user_dep_mapping WHERE userid = "+reqUserId+"";
 
-    var getCommunity = "SELECT departmentid FROM user_dep_mapping WHERE userid = '"+reqUserId+"'";
-
-    console.log("query is :" +getCommunity);
+    console.log("getCommunity" +getCommunity);
 
     mysql.fetchData(function(err, result){
         if(err){
@@ -23,6 +23,8 @@ router.post('/getCommunities', function (req, res, next) {
         }
         else{
             if(result.length>0){
+
+                console.log("HERE");
                 for(var i =0;i <result.length;i++)
                 {
                     if(i == result.length -1)
@@ -36,6 +38,7 @@ router.post('/getCommunities', function (req, res, next) {
                 }
 
                 var getCommunityNames1 = "SELECT departmentid,dep_name FROM department WHERE departmentid IN("+departmentsID+")";
+                console.log("getCommunityNames1", getCommunityNames1);
                 mysql.fetchData(function(err, result1){
                     if(err){
                         throw err;
@@ -87,5 +90,35 @@ router.post('/getAllCommunities', function (req, res, next) {
             }
         },getCommunity);
     });
+
+
+router.post('/getUserCommunity', function (req, res, next) {
+
+    var reqUserId = req.body.userId;
+    var departments =[];
+    var departmentsID ='';
+    console.log("USER ID"+ reqUserId);
+    var getUserCommunity = "SELECT user.departmentid,dep_name FROM department JOIN user on user.departmentid =department.departmentid WHERE user.userid = "+reqUserId+"";
+
+    console.log("getUserCommunity" +getUserCommunity);
+
+    mysql.fetchData(function(err, result){
+        if(err){
+            throw err;
+        }
+        else{
+            if(result.length>0)
+            {
+                console.log(result)
+                departments.push(result[0]);
+                res.status(201).json({departments});
+            }
+            else
+            {
+                res.status(401).json({message: "Error"});
+            }
+        }
+    },getUserCommunity);
+});
 
 module.exports = router;

@@ -11,7 +11,7 @@ router.post('/uploadFile', upload.any(), function (req, res, next) {
     
     const file = req.files[0]; 
     const meta = req.body;
-    const reqUserId = 1;
+    const reqUserId = req.body.userId;
     //const reqUserId = req.body.userId;
     //const reqParentId = Number(req.body.parentId);
     const reqFileName = req.body.name;
@@ -68,6 +68,7 @@ router.post('/uploadFile', upload.any(), function (req, res, next) {
             }
             else{
                 console.log('Valid Upload');
+                res.status(200).end();
                 // var datenow = new Date();
                 // addActivityQuery = "INSERT INTO Activity(Description, UserId, ActivityTime) Values ( 'Uploaded File "+reqFileName+"'," + reqUserId + ",'" + datenow + "')";
                 //         console.log("inner query : " + addActivityQuery);
@@ -80,7 +81,8 @@ router.post('/uploadFile', upload.any(), function (req, res, next) {
                 //         }, addActivityQuery);
             }
         },addFile);
-        res.end();
+        //res.status(200).end();
+
     //}
 });
 
